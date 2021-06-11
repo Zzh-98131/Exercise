@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://unpkg.com/vue"></script>
+	</head>
+	<body>
+		<div id="vfor">
+			<p v-for="(stud,i) in names">--{{i}}--学号：{{stud.id}}，姓名：{{stud.name}}</p>
+		</div>
+		
+		<script>
+			var vf = new Vue({
+				el: '#vfor',
+				data: {
+					names: [
+						{id: 1,name: 'zhangsan'},
+						{id: 2,name: 'lisi'}
+					]
+				}
+			})
+			vf.names.push({id: 3,name: 'wnagwu'},{id: 4,name: 'zhaoliu'})
+			vf.names.pop() //删除并返回数组最后一个元素
+		</script>
+	</body>
+</html>

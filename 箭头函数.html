@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+		<script src="https://unpkg.com/vue"></script>
+		<script src="./js/vue.js"></script>
+		<script src="./js/vue.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h1>{{ 'Function:' + consoleResult }}</h1>
+			<button @click="">Function ()</button>
+		</div>
+		<script>
+			var app = new Vue({
+				el: '#app',
+				data: {
+					consoleResult: '暂无'
+				},
+				mounted() {
+					this.start()
+				},
+				methods: {
+					start() {
+						var that = this
+						function fnThis() {
+							console.log('fnThis: ', this)
+						}
+						var arrowThis = () => {
+							console.log('arrowThis: ', this)
+						}
+						var obj = {fn: fnThis, arrow:arrowThis}
+						fnThis()
+						arrowThis()
+						obj.fn()
+						obj.arrow()
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

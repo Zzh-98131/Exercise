@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://unpkg.com/vue"></script>
+	</head>
+	<body>
+		<div id="roledis">
+			<div v-if="role == 'admin' || role == 'super_admin'">
+				您好，admin
+			</div>
+			<div v-else-if="role == 'user'">
+				您好，用户
+			</div>
+			<div v-else="">
+				您无权限
+			</div>
+		</div>
+		
+		<script>
+			var rd = new Vue({
+				el: "#roledis",
+				data: {
+					role: "me",
+				}
+			})
+		</script>
+	</body>
+</html>

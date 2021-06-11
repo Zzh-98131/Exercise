@@ -1,0 +1,159 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <title>招募令</title>
+	 <script src="js/vue.js"></script>
+     <style>
+		 .lastPage{
+			width: 20px;
+			height: 20px;
+			position: relative;
+			left: 342px;
+			top: 448px;
+			cursor: pointer;
+		 }
+		 .nextPage{
+		 	width: 20px;
+		 	height: 20px;
+			position: relative;
+			left: 342px;
+			top: 450px;
+			cursor: pointer;
+		 }
+		 .nowPageBg{
+			width: 100px !important;
+		 }
+         .mini_screen {
+         	width: 100px;
+			padding: 0;
+         	position: relative;
+         	top: 190px;
+         	left: 238px;
+         }
+         .main_screen {
+         	width: 210px;
+         	position: relative;
+         	top: 356px;
+         	left: 24px;
+         }
+         .app_wrapper {
+         	background-image: url(./img/bg2.jpg);
+         	background-size: 100%;
+         	width: 375px;
+         	height: 667px;
+         }
+		 body {
+		 	display: flex;
+		 	align-items: center;
+		 	justify-content: center;
+		 }
+		 ul {
+			 padding: 0;
+			 text-align: center;
+		 }
+		 li {
+			 list-style: none;
+		 }
+		 li:hover {
+		 	 cursor: pointer;
+		 }
+     </style>
+ </head>
+ <body>
+  
+      <div id="app">
+      	<div class="app_wrapper">
+			<div class="lastPage" @click="nowPage--" @mouseenter="btnOver" @mouseleave="startScroll"></div>
+			<div class="nextPage" @click="nowPage++" @mouseenter="btnOver" @mouseleave="startScroll"></div>
+			
+      		<div class="main_screen">
+      			<img v-if="nowPage===1" src="img/b1.png" style="width: 100%;" />
+				<img v-if="nowPage===2" src="img/b2.png" style="width: 100%;" />
+				<img v-if="nowPage===3" src="img/b3.png" style="width: 100%;" />
+				<img v-if="nowPage===4" src="img/b4.png" style="width: 100%;" />
+      		</div>
+			
+      		<div class="mini_screen">
+				<ul>
+					<li>
+						<img :src="nowPage===1?'img/smm1_b.png':'img/smm1.png'"
+							class="page"
+							:class="{'nowPageBg': nowPage===1}"
+							style="width: 90px;"
+							@click="changePage(1)"
+							@mouseenter="changePage(1)"
+							@mouseleave="startScroll"
+						/>
+						<img :src="nowPage===2?'img/smm2_b.png':'img/smm2.png'"
+							class="page"
+							:class="{'nowPageBg': nowPage===2}"
+							style="width: 90px;"
+							@click="changePage(2)"
+							@mouseenter="changePage(2)"
+							@mouseleave="startScroll"
+						/>
+						<img :src="nowPage===3?'img/smm3_b.png':'img/smm3.png'"
+							class="page"
+							:class="{'nowPageBg': nowPage===3}"
+							style="width: 90px;"
+							@click="changePage(3)"
+							@mouseenter="changePage(3)"
+							@mouseleave="startScroll"
+						/>
+						<img :src="nowPage===4?'img/smm4_b.png':'img/smm4.png'"
+							class="page"
+							:class="{'nowPageBg': nowPage===4}"
+							style="width: 90px;"
+							@click="changePage(4)"
+							@mouseenter="changePage(4)"
+							@mouseleave="startScroll"
+						/>
+					</li>
+				</ul>
+      		</div>
+			
+      	</div>
+      </div>
+	  
+     <script>
+         var app = new Vue({
+             el:"#app",
+             data:{
+				 nowPage: 1,
+				 timer: null
+             },
+			 watch: {
+				 nowPage: function (val) {
+					 if (val > 4) {
+						 this.nowPage = 1
+					 }
+					 if (val < 1) {
+						 this.nowPage = 4
+					 }
+				 }
+			 },
+			 mounted() {
+			 	this.timer = setInterval(_ => {
+					this.nowPage++
+				}, 1.5 * 1000)
+			 },
+			methods: {
+				btnOver() {
+					clearInterval(this.timer)
+				},
+				changePage(pageNo) {
+					clearInterval(this.timer)
+					this.nowPage = pageNo
+				},
+				startScroll() {
+					this.timer = setInterval(_ => {
+						this.nowPage++
+					}, 1.5 * 1000)
+				}
+			}
+         });
+     </script>
+  
+ </body>
+ </html>

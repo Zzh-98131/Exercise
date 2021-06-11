@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		
+		<div id="app">
+			<button_counter title="counter" @clicknow="clicknow"><!--@后面仅支持小写-->
+			</button_counter>
+		</div>
+		
+		<script>
+			Vue.component('button_counter',{
+				props: ['title'],
+				template: '<div><h1>it is a button</h1><button v-on:click="clickFun">You clicked me {{counter}} times.</button></div>',
+				data: function(){	// data: {counter: 0} 错误，按钮内不会显示counter的值,data必须是个函数
+					return {counter: 0}	
+				},
+				methods: {
+					clickFun: function(){
+						this.counter ++;
+						this.$emit('clicknow',this.counter);
+					}
+				}
+			})
+			var ap = new Vue({
+				el: '#app',
+				data: {
+					
+				},
+				methods: {
+					clicknow: function(e){
+						console.log(e);
+					}
+				}
+			})
+		</script>
+		
+	</body>
+</html>

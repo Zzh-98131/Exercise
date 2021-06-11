@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>组件练习</title>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<!-- <script src="https://unpkg.com/vue"></script> -->
+		<!-- <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script> -->
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app-7">
+			<ol>
+				<!-- 未每一个todo-item提供tudo对象.
+				tudo对象是变量,内容可以是动态的.
+				还需要为每一个组件提供一个"key". -->
+				<todo-item 
+				v-for="item in groceryList" 
+				v-bind:tudo="item" 
+				v-bind:key="item.id"
+				><!-- 在tudo-item标签里面定义	 -->
+				</todo-item>
+			</ol>
+			
+		</div>
+		-------------分割线-------------
+		<div id="compoTitle">
+			<blog-post title="Component Test"></blog-post>
+		</div>
+		
+		<script>
+			Vue.component('todo-item',{
+				props: ['todo'],
+				template: '<li>{{tudo}}</li>'	//模板
+			})
+			
+			var app7 = new Vue({
+				el: '#app-7',
+				data: {
+					groceryList: [
+						{id: 0,text: '相机'},
+						{id: 1,text: '玻璃'},
+						{id: 2,text: '膝盖'},
+					]
+				}
+			})
+			
+			
+			Vue.component('blog-post',{
+				props: ['title'],
+				template: '<h3>{{title}}</h3>'
+				});
+			
+			new Vue({
+				el: '#compoTitle',
+			})
+		</script>
+	</body>
+</html>

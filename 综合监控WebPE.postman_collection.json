@@ -1,0 +1,2103 @@
+{
+	"info": {
+		"_postman_id": "5f2c2f84-276c-4a39-89b3-e9c8ed66cd0b",
+		"name": "综合监控WebPE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "其他",
+			"item": [
+				{
+					"name": "验证码",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pe}}/ajax/validimg.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"validimg.do"
+							]
+						},
+						"description": "获取验证码"
+					},
+					"response": []
+				},
+				{
+					"name": "APP版本",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pe}}/ajax/mobile/version.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"mobile",
+								"version.do"
+							]
+						},
+						"description": "APP版本获取"
+					},
+					"response": []
+				},
+				{
+					"name": "字典获取",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pe}}/ajax/dictionary.do?key=sys_country",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"dictionary.do"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "sys_country"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "字典列表获取",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pe}}/ajax/dictionary/list.do?keys=sys_currencysymbol&keys=sys_country&key=sys_currencysymbol",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"dictionary",
+								"list.do"
+							],
+							"query": [
+								{
+									"key": "keys",
+									"value": "sys_currencysymbol"
+								},
+								{
+									"key": "keys",
+									"value": "sys_country"
+								},
+								{
+									"key": "key",
+									"value": "sys_currencysymbol"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "语言列表获取",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pe}}/ajax/languages.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"languages.do"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "语言设置",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "languageId",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/language/resert.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"language",
+								"resert.do"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "告警",
+			"item": [
+				{
+					"name": "历史告警导出",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pe}}/ajax/alarm/log/export.do?deviceId=1&date=2018-03-13",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"alarm",
+								"log",
+								"export.do"
+							],
+							"query": [
+								{
+									"key": "deviceId",
+									"value": "1"
+								},
+								{
+									"key": "date",
+									"value": "2018-03-13"
+								}
+							]
+						},
+						"description": "历史告警导出"
+					},
+					"response": []
+				},
+				{
+					"name": "分页实时告警",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pe}}/ajax/alarm/page/real.do?stationId=91&pageIndex=1&pageSize=10",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"alarm",
+								"page",
+								"real.do"
+							],
+							"query": [
+								{
+									"key": "stationId",
+									"value": "91"
+								},
+								{
+									"key": "pageIndex",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
+							]
+						},
+						"description": "实时告警"
+					},
+					"response": []
+				},
+				{
+					"name": "分页历史告警",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pe}}/ajax/alarm/page/log.do?deviceId=229&pageIndex=1&pageSize=10&searchDate=2018-08-06",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"alarm",
+								"page",
+								"log.do"
+							],
+							"query": [
+								{
+									"key": "deviceId",
+									"value": "229"
+								},
+								{
+									"key": "pageIndex",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "searchDate",
+									"value": "2018-08-06"
+								}
+							]
+						},
+						"description": "历史告警"
+					},
+					"response": []
+				},
+				{
+					"name": "实时告警数量",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pe}}/ajax/alarm/real/counts.do?stationId=91",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"alarm",
+								"real",
+								"counts.do"
+							],
+							"query": [
+								{
+									"key": "stationId",
+									"value": "91"
+								}
+							]
+						},
+						"description": "实时告警数量"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "用户",
+			"item": [
+				{
+					"name": "用户注册",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "idbk",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "nickName",
+									"value": "east",
+									"type": "text"
+								},
+								{
+									"key": "mobile",
+									"value": "10086",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "east@eastups.com",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/user/register.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"user",
+								"register.do"
+							]
+						},
+						"description": "注册用户"
+					},
+					"response": []
+				},
+				{
+					"name": "用户登录",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "east",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "300376",
+									"type": "text"
+								},
+								{
+									"key": "validCode",
+									"value": "east",
+									"type": "text"
+								},
+								{
+									"key": "saveToCookie",
+									"value": "false",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/user/login.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"user",
+								"login.do"
+							]
+						},
+						"description": "用户登录"
+					},
+					"response": []
+				},
+				{
+					"name": "退出登录",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pe}}/ajax/user/loginout.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"user",
+								"loginout.do"
+							]
+						},
+						"description": "退出登录"
+					},
+					"response": []
+				},
+				{
+					"name": "用户信息",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pe}}/ajax/user/info.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"user",
+								"info.do"
+							]
+						},
+						"description": "用户信息获取"
+					},
+					"response": []
+				},
+				{
+					"name": "用户信息修改",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nickName",
+									"value": "idbk",
+									"type": "text"
+								},
+								{
+									"key": "mobile",
+									"value": "13501234567",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "idbk@eastups.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/user/info/save.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"user",
+								"info",
+								"save.do"
+							]
+						},
+						"description": "用户信息修改"
+					},
+					"response": []
+				},
+				{
+					"name": "密码修改",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "oldpsw",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "300376",
+									"type": "text"
+								},
+								{
+									"key": "againpsw",
+									"value": "300376",
+									"type": "text"
+								},
+								{
+									"key": "validCode",
+									"value": "2222",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/user/password/save.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"user",
+								"password",
+								"save.do"
+							]
+						},
+						"description": "密码修改"
+					},
+					"response": []
+				},
+				{
+					"name": "邮箱验证码发送",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "zhangyuanf@eastups.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/user/email/active.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"user",
+								"email",
+								"active.do"
+							]
+						},
+						"description": "邮箱验证码发送"
+					},
+					"response": []
+				},
+				{
+					"name": "邮箱验证",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "verifyCode",
+									"value": "316087",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/user/email/verify.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"user",
+								"email",
+								"verify.do"
+							]
+						},
+						"description": "邮箱验证"
+					},
+					"response": []
+				},
+				{
+					"name": "密码找回验证码发送",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "zhangy",
+									"type": "text"
+								},
+								{
+									"key": "validCode",
+									"value": "1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/user/password/back.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"user",
+								"password",
+								"back.do"
+							]
+						},
+						"description": "密码找回验证码发送"
+					},
+					"response": []
+				},
+				{
+					"name": "密码重置",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "zhangy",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "againpsw",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "verifyCode",
+									"value": "083338",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/user/password/resert.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"user",
+								"password",
+								"resert.do"
+							]
+						},
+						"description": "密码重置"
+					},
+					"response": []
+				},
+				{
+					"name": "好友列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pe}}/ajax/user/attached/lists.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"user",
+								"attached",
+								"lists.do"
+							]
+						},
+						"description": "好友列表"
+					},
+					"response": []
+				},
+				{
+					"name": "删除好友",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "friendId",
+									"value": "9",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/user/attached/delete.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"user",
+								"attached",
+								"delete.do"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "添加用户",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "friendName",
+									"value": "east",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/user/attached/askfor.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"user",
+								"attached",
+								"askfor.do"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "好友请求列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pe}}/ajax/user/attached/requests.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"user",
+								"attached",
+								"requests.do"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "同意好友请求",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "friendId",
+									"value": "9",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/user/attached/agree.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"user",
+								"attached",
+								"agree.do"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "拒绝好友请求",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "friendId",
+									"value": "9",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/user/attached/refuse.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"user",
+								"attached",
+								"refuse.do"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "站点",
+			"item": [
+				{
+					"name": "站点信息",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pe}}/ajax/station/baseinfo.do?stationId=3807&systemType=1",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"station",
+								"baseinfo.do"
+							],
+							"query": [
+								{
+									"key": "stationId",
+									"value": "3807"
+								},
+								{
+									"key": "systemType",
+									"value": "1"
+								}
+							]
+						},
+						"description": "站点信息获取"
+					},
+					"response": []
+				},
+				{
+					"name": "站点模板详细获取",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pe}}/ajax/station/templates/detail.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"station",
+								"templates",
+								"detail.do"
+							]
+						},
+						"description": "站点模板详细获取，含属性列表"
+					},
+					"response": []
+				},
+				{
+					"name": "站点设备列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pe}}/ajax/station/devices.do?stationId=88",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"station",
+								"devices.do"
+							],
+							"query": [
+								{
+									"key": "stationId",
+									"value": "88"
+								}
+							]
+						},
+						"description": "站点设备列表（仅限设备SN、名称信息）"
+					},
+					"response": []
+				},
+				{
+					"name": "站点新增",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"station\":{\r\n    \t\"stationName\":\"机房sss\",\r\n    \t\"stationTemplateId\":2,\r\n    \t\"country\":\"中国\",\r\n    \t\"address\":\"河北省 张家口市 万全区\",\r\n    \t\"longitude\":\"114.807869\",\r\n    \t\"latitude\":\"40.834337\",\r\n    \t\"sysAreaId\":29,\r\n    \t\"timeZoneKey\":\"+080010\"\r\n    },\r\n    \"schemas\":[]\r\n}"
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/station/create.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"station",
+								"create.do"
+							]
+						},
+						"description": "站点新增"
+					},
+					"response": []
+				},
+				{
+					"name": "站点编辑",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"station\":{\r\n        \"id\":268,\r\n        \"stationName\": \"测试机房\",\r\n    \t\"stationTemplateId\":2,\r\n    \t\"country\":\"中国\",\r\n    \t\"address\":\"河北省 张家口市 万全区\",\r\n    \t\"longitude\":\"114.807869\",\r\n    \t\"latitude\":\"40.834337\",\r\n    \t\"timeZoneKey\":\"+080010\"\r\n    },\r\n    \"schemas\":[]\r\n}"
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/station/create.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"station",
+								"create.do"
+							]
+						},
+						"description": "站点编辑"
+					},
+					"response": []
+				},
+				{
+					"name": "站点删除",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "stationId",
+									"value": "269",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/station/del.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"station",
+								"del.do"
+							]
+						},
+						"description": "站点删除"
+					},
+					"response": []
+				},
+				{
+					"name": "他人共享列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pe}}/ajax/station/attached/requests.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"station",
+								"attached",
+								"requests.do"
+							]
+						},
+						"description": "他人共享列表"
+					},
+					"response": []
+				},
+				{
+					"name": "站点分享列表 ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pe}}/ajax/station/shares.do?stationId=268",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"station",
+								"shares.do"
+							],
+							"query": [
+								{
+									"key": "stationId",
+									"value": "268"
+								}
+							]
+						},
+						"description": "自建站点分享目标列表"
+					},
+					"response": []
+				},
+				{
+					"name": "分区添加/编辑",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "stationName",
+									"value": "华南11",
+									"type": "text"
+								},
+								{
+									"key": "stationId",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "superId",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/station/category/edit.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"station",
+								"category",
+								"edit.do"
+							]
+						},
+						"description": "分区添加/编辑"
+					},
+					"response": []
+				},
+				{
+					"name": "站点分享",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "friendId",
+									"value": "36",
+									"type": "text"
+								},
+								{
+									"key": "selfId",
+									"value": "11",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/station/attached/ask.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"station",
+								"attached",
+								"ask.do"
+							]
+						},
+						"description": "站点分享"
+					},
+					"response": []
+				},
+				{
+					"name": "接受他人分享",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "superId",
+									"value": "34",
+									"type": "text"
+								},
+								{
+									"key": "oldSuperId",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "subId",
+									"value": "8",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/station/attached/accepted.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"station",
+								"attached",
+								"accepted.do"
+							]
+						},
+						"description": "接受他人分享"
+					},
+					"response": []
+				},
+				{
+					"name": "拒绝他人分享",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "superId",
+									"value": "34",
+									"type": "text"
+								},
+								{
+									"key": "subId",
+									"value": "8",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/station/attached/rejected.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"station",
+								"attached",
+								"rejected.do"
+							]
+						},
+						"description": "拒绝他人分享"
+					},
+					"response": []
+				},
+				{
+					"name": "站点/分区父级更换",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "superId",
+									"value": "34",
+									"type": "text"
+								},
+								{
+									"key": "subId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "oldSuperId",
+									"value": "45",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/station/attached/modify.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"station",
+								"attached",
+								"modify.do"
+							]
+						},
+						"description": "站点/分区父级更换"
+					},
+					"response": []
+				},
+				{
+					"name": "取消分享/共享关系",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "superId",
+									"value": "34",
+									"type": "text"
+								},
+								{
+									"key": "subId",
+									"value": "8",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/station/attached/abandom.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"station",
+								"attached",
+								"abandom.do"
+							]
+						},
+						"description": "取消分享/共享关系"
+					},
+					"response": []
+				},
+				{
+					"name": "系统区域树形列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pe}}/ajax/station/area/tree.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"station",
+								"area",
+								"tree.do"
+							]
+						},
+						"description": "系统区域树形列表"
+					},
+					"response": []
+				},
+				{
+					"name": "站点列表(过滤)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "appkey",
+								"value": "idbk",
+								"type": "text"
+							},
+							{
+								"key": "code",
+								"value": "123456720191218143230747",
+								"type": "text"
+							},
+							{
+								"key": "timestamp",
+								"value": "1576650750747",
+								"type": "text"
+							},
+							{
+								"key": "sign",
+								"value": "7391e47421cb4e2803b68d9a451fec73c85067ce",
+								"type": "text"
+							},
+							{
+								"key": "code",
+								"value": "20191129000000123",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "filterText",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/station/filter/list.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"station",
+								"filter",
+								"list.do"
+							]
+						},
+						"description": "站点列表(过滤)"
+					},
+					"response": []
+				},
+				{
+					"name": "站点树(过滤)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "filterText",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/station/filter/tree.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"station",
+								"filter",
+								"tree.do"
+							]
+						},
+						"description": "站点树(过滤)"
+					},
+					"response": []
+				},
+				{
+					"name": "站点子集(过滤)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "filterText",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "superId",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/station/filter/subs.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"station",
+								"filter",
+								"subs.do"
+							]
+						},
+						"description": "站点子集(过滤)"
+					},
+					"response": []
+				},
+				{
+					"name": "分组列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pe}}/ajax/station/category.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"station",
+								"category.do"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "站点设备列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pe}}/ajax/station/devices.do?stationId=268",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"station",
+								"devices.do"
+							],
+							"query": [
+								{
+									"key": "stationId",
+									"value": "268"
+								}
+							]
+						},
+						"description": "站点设备列表（仅限设备SN、名称信息）"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "设备",
+			"item": [
+				{
+					"name": "设备列表",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{pe}}/ajax/device/getList.do?stationId=268&systemType=1",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"device",
+								"getList.do"
+							],
+							"query": [
+								{
+									"key": "stationId",
+									"value": "268"
+								},
+								{
+									"key": "systemType",
+									"value": "1"
+								}
+							]
+						},
+						"description": "设备列表（含设备主要数据）"
+					},
+					"response": []
+				},
+				{
+					"name": "设备实时数据",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{pe}}/ajax/device/getReal.do?stationId=268&deviceId=562",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"device",
+								"getReal.do"
+							],
+							"query": [
+								{
+									"key": "stationId",
+									"value": "268"
+								},
+								{
+									"key": "deviceId",
+									"value": "562"
+								}
+							]
+						},
+						"description": "设备实时数据"
+					},
+					"response": []
+				},
+				{
+					"name": "设备历史数据",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{pe}}/ajax/device/getLog.do?stationId=268&deviceId=562&date=2018-07-23",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"device",
+								"getLog.do"
+							],
+							"query": [
+								{
+									"key": "stationId",
+									"value": "268"
+								},
+								{
+									"key": "deviceId",
+									"value": "562"
+								},
+								{
+									"key": "date",
+									"value": "2018-07-23"
+								}
+							]
+						},
+						"description": "设备历史数据"
+					},
+					"response": []
+				},
+				{
+					"name": "设备基本信息",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{pe}}/ajax/device/base/info.do?deviceId=562",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"device",
+								"base",
+								"info.do"
+							],
+							"query": [
+								{
+									"key": "deviceId",
+									"value": "562"
+								}
+							]
+						},
+						"description": "设备基本信息获取"
+					},
+					"response": []
+				},
+				{
+					"name": "设备类型",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{pe}}/ajax/device/getTypes.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"device",
+								"getTypes.do"
+							]
+						},
+						"description": "设备类型列表获取"
+					},
+					"response": []
+				},
+				{
+					"name": "历史数据导出",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{pe}}/ajax/device/log/export.do?stationId=13&systemType=1&deviceId=1&date=2017-01-01",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"device",
+								"log",
+								"export.do"
+							],
+							"query": [
+								{
+									"key": "stationId",
+									"value": "13"
+								},
+								{
+									"key": "systemType",
+									"value": "1"
+								},
+								{
+									"key": "deviceId",
+									"value": "1"
+								},
+								{
+									"key": "date",
+									"value": "2017-01-01"
+								}
+							]
+						},
+						"description": "历史数据导出"
+					},
+					"response": []
+				},
+				{
+					"name": "设备列表（树形结构）",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{pe}}/ajax/device/tree.do?stationId=268",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"device",
+								"tree.do"
+							],
+							"query": [
+								{
+									"key": "stationId",
+									"value": "268"
+								}
+							]
+						},
+						"description": "设备列表（树形结构）"
+					},
+					"response": []
+				},
+				{
+					"name": "设备添加（综合）",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "stationId",
+									"value": "88",
+									"type": "text"
+								},
+								{
+									"key": "deviceType",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "deviceSn",
+									"value": "4N1SMM21",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/device/add.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"device",
+								"add.do"
+							]
+						},
+						"description": "设备添加（综合）"
+					},
+					"response": []
+				},
+				{
+					"name": "设备类型修改",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "devices",
+									"value": "[{\"deviceId\":363,\"categoryId\":1}]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/device/category/edit.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"device",
+								"category",
+								"edit.do"
+							]
+						},
+						"description": "设备类型修改"
+					},
+					"response": []
+				},
+				{
+					"name": "设备编辑(新)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "deviceId",
+									"value": "206",
+									"type": "text"
+								},
+								{
+									"key": "categoryId",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "deviceName",
+									"value": "采集卡_4PWTCFA0",
+									"type": "text"
+								},
+								{
+									"key": "show",
+									"value": "false",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/device/edit.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"device",
+								"edit.do"
+							]
+						},
+						"description": "设备编辑"
+					},
+					"response": []
+				},
+				{
+					"name": "设备类型(分组)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{pe}}/ajax/device/categorys.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"device",
+								"categorys.do"
+							]
+						},
+						"description": "设备类型列表获取"
+					},
+					"response": []
+				},
+				{
+					"name": "设备添加（返回分组）",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "stationId",
+									"value": "268",
+									"type": "text"
+								},
+								{
+									"key": "deviceType",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "deviceSn",
+									"value": "4N1SMM21",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{pe}}/ajax/device/classify/add.do",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"device",
+								"classify",
+								"add.do"
+							]
+						},
+						"description": "设备添加（综合）"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "概览",
+			"item": [
+				{
+					"name": "获取概览数据",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{pe}}/ajax/station/real/statistics.do?stationId=3019",
+							"host": [
+								"{{pe}}"
+							],
+							"path": [
+								"ajax",
+								"station",
+								"real",
+								"statistics.do"
+							],
+							"query": [
+								{
+									"key": "stationId",
+									"value": "3019"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "概览",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "用户登录",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "east",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "300376",
+							"type": "text"
+						},
+						{
+							"key": "validCode",
+							"value": "east",
+							"type": "text"
+						},
+						{
+							"key": "saveToCookie",
+							"value": "false",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{pe}}/ajax/user/login.do",
+					"host": [
+						"{{pe}}"
+					],
+					"path": [
+						"ajax",
+						"user",
+						"login.do"
+					]
+				},
+				"description": "用户登录"
+			},
+			"response": []
+		},
+		{
+			"name": "用户登录 Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "east",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "300376",
+							"type": "text"
+						},
+						{
+							"key": "validCode",
+							"value": "east",
+							"type": "text"
+						},
+						{
+							"key": "saveToCookie",
+							"value": "false",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{pe}}/ajax/user/login.do",
+					"host": [
+						"{{pe}}"
+					],
+					"path": [
+						"ajax",
+						"user",
+						"login.do"
+					]
+				},
+				"description": "用户登录"
+			},
+			"response": []
+		},
+		{
+			"name": "线上登录",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "east",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "300376",
+							"type": "text"
+						},
+						{
+							"key": "validCode",
+							"value": "east",
+							"type": "text"
+						},
+						{
+							"key": "saveToCookie",
+							"value": "false",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{pe}}/ajax/user/login.do",
+					"host": [
+						"{{pe}}"
+					],
+					"path": [
+						"ajax",
+						"user",
+						"login.do"
+					]
+				},
+				"description": "用户登录"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

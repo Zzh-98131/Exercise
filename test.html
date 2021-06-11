@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://unpkg.com/vue"></script>
+	</head>
+	<style>
+		html, body {
+			width: 100%;
+			height: 100%;
+			padding: 0;
+			margin: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.d-block {
+			width: 100px;
+			height: 100px;
+			background-color: #C1C1C1;
+			opacity: 1;
+			transition: opacity 1s; 
+		}
+		.d-block:hover {
+			opacity: 0;
+		}
+		.d-aside {
+			width: 50px;
+			height: 100px;
+			background-color: #ff5500;
+		}
+	</style>
+	<body>
+		<div class="d-block" onmouseenter="setNone()"></div>
+		<div class="d-aside"></div>
+			
+		<script>
+			let db = document.getElementsByTagName('div')[0]
+			function setNone() {
+				setTimeout(() => {
+					db.style.display = 'none'
+				}, 1000)
+			}
+		</script>
+	</body>
+</html>

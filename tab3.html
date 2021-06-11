@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+	<style>
+	*{
+		padding: 0;
+		margin: 0;
+	}
+	.tabWrap{
+		width: 756px;
+		height: 200px; 
+		margin: 0 auto;
+		border: 1px solid #000;
+	}
+	ul{
+		border: #000000 solid 0px;
+	}
+	.tabWrap li{
+		float: left;
+		list-style: none;
+	}
+	.tabWrap li a{
+		display: block;
+		width: 250px;
+		height: 49px;
+		line-height: 49px;
+		text-align: center;
+		border: solid antiquewhite 1px;
+		text-decoration: none;
+	}
+	.details{
+		width: 756px;
+		height: 150px;
+		display: block;
+		float: left;
+		background: rgba(170, 0, 255, 0.8);
+	}
+	.details .tab-card{
+		display: none;
+	}
+	</style>
+	<body>
+		<div id="app" class="tabWrap">
+			<ul>
+				<li v-for="(tab,index) in tabName">
+					<a href="#" @click="changeTab(index)">{{tab.name}}</a>
+				</li>
+			</ul>
+			<div class="details">
+				<div class="tab-card" style="display: block; ">I love htmlhtmlhtmlhtmlhtml<div>adljasdaj</div></div>
+				<div class="tab-card">I love VueVueVueVueVue<div>adljasdaj</div><div>adljasdaj</div><div>adljasdaj</div></div>
+				<div class="tab-card">I love CssCssCssCssCss</div>
+			</div>
+		</div>
+		<script>
+			new Vue({
+				el: '#app',
+				data: {
+					tabName: [{
+						name: 'html',
+						isActive: true
+					},
+					{
+						name: 'Vue',
+						isActive: false
+					},
+					{
+						name: 'css',
+						isActive: false
+					}]
+				},
+				methods:{
+					changeTab(ind){
+						var tabCard = document.querySelectorAll(".tab-card");
+						// tabCard[1].style.display = "none";
+						for(var i = 0; i < tabCard.length; i++){
+							tabCard[i].style.display = "none";
+						}
+						tabCard[ind].style.display = "block";
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
