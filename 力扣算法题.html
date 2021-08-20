@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript" charset="utf-8">
+    /**
+     * 给定一个整数，写一个函数来判断它是否是 4 的幂次方。如果是，返回 true ；否则，返回 false
+     * url: https://leetcode-cn.com/problems/power-of-four/
+     */
+    var isPowerOfFour = function(n) {
+      let binary = n.toString(2)
+      let regular = /^1(00)*$/
+      return regular.test(binary)
+    }
+
+    /**
+     * 找出所有子集的异或总和再求和
+     * 异或逻辑运算（XOR）相同为0，不同为1
+     * https://leetcode-cn.com/problems/sum-of-all-subset-xor-totals/
+     */ 
+    var subsetXORSum = function(nums) {
+      // 0  1    2          3                          4
+      // 0  0/1  0/1/2/1,2  0/1/2/3/1,2/1,3/2,3/1,2,3  0/1/2/3/4/1,2/1,3/1,4/2,3/2,4/3,4/1,2,3/1,2,4/1,3,4/2,3,4/1,2,3,4
+      // 1  2    4          8                          16
+      let len = Math.pow(2, nums.length)
+      let sum = 0
+      for (let i = 0; i < len; i++) {
+        let arr = new Array(nums.length)
+        let nArr = []
+        i.toString(2).split('').map(e => {
+          arr.shift()
+          arr.push(e)
+        })
+        arr.map((e, index) => {
+          if (e && e === '1') {
+            nArr.push(nums[index])
+          }
+        })
+        if (nArr.length) {
+          sum += nArr.reduce((a, b) => {
+          return a ^ b
+        })
+        }
+      }
+      return sum
+    };
+
+    /**
+     * 某乐团的演出场地可视作 num * num 的二维矩阵 grid（左上角坐标为 [0,0])，每个位置站有一位成员。乐团共有 9 种乐器，乐器编号为 1~9，每位成员持有 1 个乐器。
+     * y+
+     * x+
+     * y-
+     * x-
+     * 暴力模拟算法，但不适用于数据量过大时的情况
+     * https://leetcode-cn.com/problems/SNJvJP
+     */
+    var orchestraLayout = function(num, xPos, yPos) {
+      let twoDArr = new Array(num)
+      for (let i = 0; i < num; i++) {
+        twoDArr[i] = new Array(num)
+      }
+      let xP = 0, // x坐标
+          yP = 0, // y坐标
+          operate = [
+            [false, true],
+            [true, true],
+            [false, false],
+            [true, false]
+          ],
+          count = 1,
+          oInd = 0,
+          value = 1 // 值
+      while (count <= num * num) {
+        if (oInd > 3) {
+          oInd = 0
+        }
+        switch (oInd) {
+          case 0: // y+
+            twoDArr[xP][yP] = value
+            count++
+            if (yP + 1 < num && !twoDArr[xP][yP + 1]) {
+              yP += 1
+            } else {
+              xP++
+              oInd++
+            }
+            value + 1 > 9 ? value = 1 : value += 1
+            break
+          case 1: // x+
+            twoDArr[xP][yP] = value
+            count++
+            if (xP + 1 < num && !twoDArr[xP + 1][yP]) {
+              xP += 1
+            } else {
+              yP--
+              oInd++
+            }
+            value + 1 > 9 ? value = 1 : value += 1
+            break
+          case 2: // y-
+            twoDArr[xP][yP] = value
+            count++
+            if (yP - 1 >= 0 && !twoDArr[xP][yP - 1]) {
+              yP -= 1
+            } else {
+              xP--
+              oInd++
+            }
+            value + 1 > 9 ? value = 1 : value += 1
+            break
+          case 3: // x-
+            twoDArr[xP][yP] = value
+            count++
+            if (xP - 1 >= 0 && !twoDArr[xP - 1][yP]) {
+              xP -= 1
+            } else {
+              yP++
+              oInd++
+            }
+            value + 1 > 9 ? value = 1 : value += 1
+            break
+          default: break
+        }
+      }
+      return twoDArr
+    };
+
+    /**
+     * 某乐团的演出场地可视作 num * num 的二维矩阵 grid（左上角坐标为 [0,0])，每个位置站有一位成员。乐团共有 9 种乐器，乐器编号为 1~9，每位成员持有 1 个乐器。
+     * 层层剥洋葱算法
+     * https://leetcode-cn.com/problems/SNJvJP
+     */
+    var orchestraLayoutV2 = function(num, xPos, yPos) {
+      let x = xPos + 1
+          y = yPos + 1,
+          distance = new Map([
+            [num - y, 'right'],
+            [yPos, 'left'],
+            [num - x, 'down'],
+            [xPos, 'up']
+          ])
+          min = Math.min(xPos, num - y, num - x, yPos)
+          closeTo = distance.get(min)
+          nums = 0,
+          result = 0
+      for (let i = 0; i < min; i++) {
+        nums += (num - i * 2) * 4 - 4
+      }
+      switch(closeTo) {
+        case 'up':
+          nums += y - min
+          break
+        case 'right':
+          nums += num - min * 3 + x - 1
+          break
+        case 'down':
+          nums += num * 3 - min * 5 - 1 - y
+          break
+        case 'left':
+          nums += num * 4 - min * 7 - 2 - x
+          break
+        default: break
+      }
+      result = nums % 9 === 0 ? 9 : nums % 9
+      return result
+    };
+
+    /**
+     * 给一个山脉数组，找出顶峰坐标
+     * 直接循环法，时间复杂度O(n)
+     * https://leetcode-cn.com/problems/peak-index-in-a-mountain-array/
+     */ 
+    var peakIndexInMountainArray = function(arr) {
+      let result = 0
+      arr.map((e, index) => {
+        if (arr[index - 1] !== undefined && arr[index + 1] !== undefined && arr[index - 1] < e && arr[index + 1] < e) {
+          result = index
+        }
+      })
+      return result
+    };
+
+    /**
+     * 给一个山脉数组，找出顶峰坐标
+     * 进阶法：二分查找，直接判断arr[mid]与arr[mid + 1]的大小，就能知道峰顶在mid哪一边
+     * https://leetcode-cn.com/problems/peak-index-in-a-mountain-array/
+     */ 
+     var peakIndexInMountainArrayV2 = function(arr) {
+      let brr = arr
+      while (brr.length !== 2) {
+        let mid = brr.length % 2 === 0 ? brr.length / 2 - 1 : (brr.length + 1) / 2 - 1
+        if (brr[mid + 1] < brr[mid]) {
+          brr = brr.slice(0, mid + 1)
+        } else {
+          brr = brr.slice(mid, brr.length)
+        }
+        console.log(brr, mid)
+      }
+      return arr.indexOf(Math.max(...brr))
+    };
+
+    /**
+     * 877. 石子游戏，偶数堆石子，每次只能从头尾拿，谁最后拿到最多。石子总数奇数
+     * https://leetcode-cn.com/problems/stone-game/
+     */
+     var stoneGame = function(piles) {
+
+    };
+
+    /**
+     * 7. 整数反转。给你一个 32 位的有符号整数 x ，返回将 x 中的数字部分反转后的结果。
+     * 如果反转后整数超过 32 位的有符号整数的范围 [−231,  231 − 1] ，就返回 0。
+     * https://leetcode-cn.com/problems/reverse-integer/
+     */ 
+     var reverse = function(x) {
+      let regular = /^(\+|\-)/.test(x.toString()), result = null
+      if (regular) {
+          result = x.toString().split('')[0] + x.toString().split('').slice(1).reverse().join('')
+      } else {
+          result =  x.toString().split('').reverse().join('')
+      }
+      if (result < -Math.pow(2, 31) || result > Math.pow(2, 31) - 1) {
+          return '0'
+      } else {
+          return result
+      }
+    };
+    console.log(stoneGame([5,1,1,1,1,5,1,2]))
+  </script>
+</body>
+</html>

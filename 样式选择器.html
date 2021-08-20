@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="base blue"></div>
+  <div class="base green"></div>
+  <div class="base">
+    <div class="red"></div>
+  </div>
+  <div class="base">
+    <div class="red">
+      <div class="purple"></div>
+      <div class="pink"></div>
+    </div>
+  </div>
+</body>
+<style>
+  .base {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border: #000000 1px solid;
+  }
+  .base .blue {
+    background-color: blue;
+  }
+  .base.green {
+    background-color: green;
+  }
+  .base .red {
+    width: 20px; /* 该属性不会继承，不指定宽高则该容器不显示 */
+    height: 20px; /* 该属性不会继承，不指定宽高则该容器不显示 */
+    background-color: red;
+  }
+  .base .purple {
+    width: 20px; /* 该属性不会继承，不指定宽高则该容器不显示 */
+    height: 20px; /* 该属性不会继承，不指定宽高则该容器不显示 */
+    background-color: purple;
+  }
+  .base>.pink {
+    width: 20px; /* 该属性不会继承，不指定宽高则该容器不显示 */
+    height: 20px; /* 该属性不会继承，不指定宽高则该容器不显示 */
+    background-color: pink;
+  }
+</style>
+</html>

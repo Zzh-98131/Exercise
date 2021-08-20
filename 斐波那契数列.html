@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            mounted() {
+                this.fibonacci(10)
+            },
+            methods: {
+                fibonacci(n) {
+                    // 0 1 1 2 3 5 8 13 21 34 55 89
+                    // 1 2 3 4 5 6 7  8  9 10 11 12
+                    let fbnc = [0, 1]
+                    for (let i = 2; i < n; i++) {
+                        fbnc[i] = fbnc[i - 1] + fbnc[i - 2]
+                    }
+                    console.log(fbnc[n - 1])
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -4,6 +4,7 @@
 		<meta charset="utf-8">
 		<title></title>
 		<script src="https://unpkg.com/vue"></script>
+		
 	</head>
 	<style>
 		html, body {
@@ -15,33 +16,33 @@
 			align-items: center;
 			justify-content: center;
 		}
-		.d-block {
-			width: 100px;
-			height: 100px;
-			background-color: #C1C1C1;
-			opacity: 1;
-			transition: opacity 1s; 
-		}
-		.d-block:hover {
-			opacity: 0;
-		}
-		.d-aside {
-			width: 50px;
-			height: 100px;
-			background-color: #ff5500;
-		}
 	</style>
 	<body>
-		<div class="d-block" onmouseenter="setNone()"></div>
-		<div class="d-aside"></div>
-			
+		<select multip tip="*可多选">
+			<option value="">全部</option>
+			<option value="1">兼职</option>
+			<option value="2">在职</option>
+			<option value="3">试用期</option>
+			<option value="4">离职</option>
+			<option value="5">删除</option>
+		</select>
+		<button onclick="btn()">11ss</button>
+		<script src="js/selectMultip.js" type="text/javascript" charset="utf-8"></script>
 		<script>
-			let db = document.getElementsByTagName('div')[0]
-			function setNone() {
-				setTimeout(() => {
-					db.style.display = 'none'
-				}, 1000)
+			testOne({
+				success: (res) => {
+					console.log('yes, ' + res)
+				}
+			})
+			function testOne(obj = {}) {
+				obj.success && obj.success('I am res')
 			}
+			function btn() {
+				selectMultip.register();
+			}
+			let regular = /^(\+|\-)/
+			console.log(regular.test('1-123'))
+			// selectMultip.register();
 		</script>
 	</body>
 </html>

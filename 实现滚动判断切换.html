@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <ul class="app-ul">
+      <li 
+        v-for="(item, index) in list" 
+        :key="index" 
+        class="li-item"
+        :class="{'active-item': now === index}"
+        @click="tabHandle(index)"
+      >
+        <span>{{ item.title }}</span>
+      </li>
+    </ul>
+
+    <div class="scroll-wrap" @scroll="onScroll">
+      <div class="scroll-item" v-for="(item, index) in list" :key="index">
+        {{ item.title }}
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        now: 0,
+        list: [
+          { title: '菜单' },
+          { title: '班级' },
+          { title: '企业' },
+          { title: '学校' },
+          { title: '小组' },
+          { title: '集团' },
+          { title: '用户' }
+        ]
+      },
+      methods: {
+        tabHandle(index) {
+          this.now = index
+        },
+        onScroll(e) {
+          let items = document.querySelectorAll(".scroll-item")
+          console.log(items[1].scrollTop)
+        }
+      }
+    })
+  </script>
+</body>
+<style>
+  .app-ul {
+    list-style: none;
+    padding: 0;
+    position: fixed;
+    /* border: black 1px solid; */
+  }
+  .app-ul li {
+    float: left;
+    display: block;
+  }
+  .app-ul .li-item {
+    cursor: pointer;
+    border-bottom: rgb(199, 199, 199) 2px solid;
+    padding: 2px 15px;
+  }
+  .app-ul .active-item {
+    border-bottom: rgb(0, 136, 160) 2px solid;
+  }
+  .scroll-wrap {
+    overflow: auto;
+    border: black 1px solid;
+    width: 99%;
+    height: calc(100% - 200px);
+    position: fixed;
+    top: 150px;
+  }
+  .scroll-wrap .scroll-item {
+    height: 200px;
+    margin: 15px 0;
+    border: black 1px solid;
+  }
+</style>
+</html>

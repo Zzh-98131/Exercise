@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function SuperType() {
+      this.property = true
+    }
+    console.log('SuperType: ', SuperType)
+    console.log('SuperType.prototype: ', SuperType.prototype)
+    console.log('SuperType.__proto__: ', SuperType.__proto__)
+
+    SuperType.prototype.getSuperValue = function() {
+      let b = new SuperType()
+      console.log(this, b) // SuperType {property: true}, SuperType {property: true}, 但this === b 为false
+      return this.property
+    }
+
+    function SubType() {
+      this.subProperty = false
+    }
+
+    let d = new SubType()
+
+    // 这里要注意，在SubType的原型对象被重写为SuperType的实例前，SubType的实例的constructor指向的是SubType；
+    // 当SubType的原型对象被重写为SuperType的实例后，SubType的实例的constructor相当于SubType.prototype.__proto__.constructor === SuperType.prototype.constructor
+    console.log('d.constructor: ', d.constructor)
+    // 继承 SuperType
+    SubType.prototype = new SuperType()
+
+    SubType.prototype.getSubValue = function() {
+      return this.subProperty
+    }
+
+    let a = new SubType()
+    console.log(a.getSuperValue(), a.subProperty, SubType.subProperty, a.getSubValue(), a.__proto__.__proto__.constructor === SuperType) // true false undefined false true
+    let c = new SuperType()
+    console.log('c.constructor: ', c.constructor, c) // SuperType() { this.property = true }, SuperType {property: true}
+    console.log('其实实例c是没有constructor属性的，当读取对象c的constructor属性时，如果找不到，就会查找与对象关联的原型中的属性，如果还查不到，就会去找原型的原型，直到最顶层为止')
+    console.log('a.constructor: ', a.constructor)
+    console.log('a.__proto__.constructor: ', a.__proto__.constructor) // SuperType() { this.property = true }
+    console.log('SubType.prototype.prototype: ', SubType.prototype.prototype) // undefined
+
+    let e = {
+      name: 'E'
+    }
+    e = new SubType()
+    console.log(e.name, e.getSuperValue()) // undefined true
+
+
+    var te = {
+      i: 1,
+      valueOf: function() {
+        if (this.i === 1) {
+          this.i++
+          return 1
+        } else {
+          return 12
+        }
+      }
+    }
+    if (te == 1 && te == 12) {
+      console.log(te)
+    }
+  </script>
+</body>
+</html>

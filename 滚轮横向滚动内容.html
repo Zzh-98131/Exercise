@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://unpkg.com/vue"></script>
+	</head>
+	<body>
+		<div id="app">
+      <div class="show_window" @mousewheel="mouseScroll">
+        <div id="scrollBox" class="actual_content">
+          {{say}}
+        </div>
+      </div>
+		</div>
+		
+		<script>
+			var app = new Vue({
+        el: '#app',
+        data: {
+          say: 'hello world',
+        },
+        methods: {
+          mouseScroll(e) {
+            let left = parseFloat(document.querySelector('#scrollBox').style.left),
+            pace = 30
+            if (!left) {
+              e.deltaY > 0 ? 
+              document.querySelector('#scrollBox').style.left = `${pace}px`
+              :
+              document.querySelector('#scrollBox').style.left = `-${pace}px`
+            } else {
+              e.deltaY > 0 ? 
+              document.querySelector('#scrollBox').style.left = left + pace + 'px'
+              :
+              document.querySelector('#scrollBox').style.left = left - pace + 'px'
+            }
+          }
+        }
+      })
+		</script>
+	</body>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+    }
+    .show_window {
+      width: 400px;
+      height: 300px;
+      border: 1px solid #000000;
+      overflow: hidden;
+    }
+    .actual_content {
+      width: 1200px;
+      height: 200px;
+      position: relative;
+      background-color: aqua;
+    }
+  </style>
+</html>
