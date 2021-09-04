@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数组依照某个值排序</title>
+</head>
+<body>
+  <script>
+    var list = [
+  {
+    "onlineCourseId": 1507,
+    "courseName": "资源管理的课程_120903",
+    "courseType": "T07"
+  },
+  {
+    "onlineCourseId": 1481,
+    "courseName": "平台课程_02",
+    "courseType": "T07"
+  },
+  {
+    "onlineCourseId": 1462,
+    "courseName": "平台课程",
+    "courseType": "T07"
+  },
+  {
+    "onlineCourseId": 1460,
+    "courseName": "新的平台资源001",
+    "courseType": "T07"
+  }
+]
+
+    function compare(protoTypeName) {
+      return function(a, b) {
+        console.table(list)
+        return a.onlineCourseId - b.onlineCourseId
+      }
+    }
+
+    // console.table(list)
+    // list.sort(compare('onlineCourseId'))
+    console.table(list)
+    list.sort(function(a,b) {
+      console.log(a, b)
+      return a.onlineCourseId - b.onlineCourseId
+    })
+    console.table(list)
+  </script>
+</body>
+</html>
