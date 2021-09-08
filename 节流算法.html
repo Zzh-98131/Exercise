@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Document</title>
+  <script>
+    var myScroll = counter => {
+      console.log(`这是第${counter}次节流操作`)
+    }
+    var throttle = (function(func, delay) {
+      let timer = null, // 定时器
+          counter = 0 // 计数器
+      return function() {
+        if (!timer) { // 如果定时器正在工作，不能打断
+          timer = setTimeout(() => { // 启动定时器
+            func(counter) // 运行目标方法，即被节流的对象
+            counter += 1 // 计数器+1
+            timer = null // 一定要将定时器重置为null，否则不会再触发判断
+          }, delay);
+        }
+      }
+    })(myScroll, 1000) // 这里需要用到函数立即执行的写法,
+  </script>
+</head>
+<body>
+  <div id="window" onscroll="throttle()">
+    <div class="main"></div>
+  </div>
+</body>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #window {
+    border: black 1px solid;
+    width: 80%;
+    height: 600px;
+    overflow: auto;
+  }
+  .main {
+    width: 100%;
+    height: 8000px;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+</style>
+</html>
