@@ -7,7 +7,7 @@
     var myScroll = counter => {
       console.log(`这是第${counter}次节流操作`)
     }
-    var throttle = (function(func, delay) {
+    var throttle = (function(func, delay) { // func：目标函数，delay：节流间隔
       let timer = null, // 定时器
           counter = 0 // 计数器
       return function() {
@@ -19,7 +19,8 @@
           }, delay);
         }
       }
-    })(myScroll, 1000) // 这里需要用到函数立即执行的写法,
+    })(myScroll, 1000) // 这里需要用到函数立即执行的写法，否则内函数不会执行，只会返回一个方法字符串
+                      // 另外，给节流函数的传参要放到立即执行的括号中，否则获取不到参数
   </script>
 </head>
 <body>
