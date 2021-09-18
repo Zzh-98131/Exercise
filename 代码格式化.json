@@ -1,16 +1,52 @@
-{
-  "interUser": "runLfb",
-  "interPwd": "d41d8cd98f00b204e9800998ecf8427e",
-  "operateAccountNo": 46982,
-  "belongSchoolId": 394,
-  "accountNo": 46982,
-  "taskId": 18996,
-  "taskType": "T20",
-  "duration": 234,
-  "isFinish": "S03",
-  "modifyAfterSubmit": "M02",
-  "subType": "",
-  "classGrade": "",
-  "termType": "",
-  "answerSaveMode": "M02"
-}
+
+      [
+        {
+          "orderBy": null,
+          "descOrAsc": null,
+          "creater": null,
+          "modifier": null,
+          "createTime": null,
+          "modifyTime": null,
+          "interUser": null,
+          "interPwd": null,
+          "advertisementId": 99,
+          "advertisementPosition": "P03",
+          "advertisementType": "A02",
+          "internalSubclass": "",
+          "photoUrl": "http://pubquanlang.oss-cn-shenzhen.aliyuncs.com/crm_file/information/202101/20210119095026_ChApn_调试三连.jpg",
+          "advertisementSlogan": "课程广告位",
+          "detailUrl": "https://www.baidu.com/",
+          "createDate": 1611021028000,
+          "statusCd": "S01",
+          "effDate": 1611020998000,
+          "expDate": 2082729599000,
+          "updateDate": 1611567513000,
+          "remark": null,
+          "operateAccountNo": 17297
+        },
+        {
+          "orderBy": null,
+          "descOrAsc": null,
+          "creater": null,
+          "modifier": null,
+          "createTime": null,
+          "modifyTime": null,
+          "interUser": null,
+          "interPwd": null,
+          "advertisementId": 95,
+          "advertisementPosition": "P03",
+          "advertisementType": "A03",
+          "internalSubclass": null,
+          "photoUrl": "http://pubquanlang.oss-cn-shenzhen.aliyuncs.com/crm_file/information/201909/20190912074249_nCT4K_课程封面2.png",
+          "advertisementSlogan": "",
+          "detailUrl": "",
+          "createDate": 1568288435000,
+          "statusCd": "S01",
+          "effDate": 1568288413000,
+          "expDate": 2082729599000,
+          "updateDate": 1586498950000,
+          "remark": null,
+          "operateAccountNo": 17296
+        }
+      ]
+            
