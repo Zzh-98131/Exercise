@@ -4,17 +4,44 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>力扣算法题</title>
 </head>
 <body>
   <script type="text/javascript" charset="utf-8">
+    /**
+     * 删除排序数组中的重复项，原地修改输入数组，并在使用O(1)额外空间的条件下完成
+     * url：https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/x2gy9m/
+     */ 
+    var removeDuplicates = function (nums) {
+      let i = 1
+      while (i < nums.length) {
+        if (nums[i] === nums[i - 1]) {
+          nums.splice(i, 1)
+          continue
+        } else {
+          i++
+        }
+      }
+      return nums.length
+    }
+    // console.log(removeDuplicates([0,0,1,1,1,2,2,3,3,4]))
+
+    /**
+     * 买卖股票的最佳时机，给定一个数组，元素是该股票当日价格，每天只能买或卖，尽可能通过多次买卖，获得最大利润
+     * url：https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/x2zsx1/
+     */ 
+    var stockPriceMax = function (prices) {
+      let max = Math.max(...prices), min = Math.min(...prices)
+      console.log(prices.max())
+    }
+    stockPriceMax([7,1,5,3,6,4])
+
     /**
      * 给定一个整数数组nums和一个整数目标值 target，请你在该数组中找出和为目标值target的那两个整数，并返回它们的数组下标。
      * 例：[3,2,4] 6 => [1,2]
      * url: https://leetcode-cn.com/problems/two-sum/submissions/
      */ 
     var twoSum = function(nums, target) {
-      nums.
     }
 
     /**

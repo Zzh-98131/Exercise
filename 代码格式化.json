@@ -1,52 +1,285 @@
+分配给贵公司的client_id=6453177f-7187-4891-9f16-81bf62bcbc56
+分配给贵公司的client_secret=UbvYFxldsYbxTdSC
+目前未提供完善的鉴权，贵公司在下述接口中，使用client_id代替token即可
 
-      [
-        {
-          "orderBy": null,
-          "descOrAsc": null,
-          "creater": null,
-          "modifier": null,
-          "createTime": null,
-          "modifyTime": null,
-          "interUser": null,
-          "interPwd": null,
-          "advertisementId": 99,
-          "advertisementPosition": "P03",
-          "advertisementType": "A02",
-          "internalSubclass": "",
-          "photoUrl": "http://pubquanlang.oss-cn-shenzhen.aliyuncs.com/crm_file/information/202101/20210119095026_ChApn_调试三连.jpg",
-          "advertisementSlogan": "课程广告位",
-          "detailUrl": "https://www.baidu.com/",
-          "createDate": 1611021028000,
-          "statusCd": "S01",
-          "effDate": 1611020998000,
-          "expDate": 2082729599000,
-          "updateDate": 1611567513000,
-          "remark": null,
-          "operateAccountNo": 17297
-        },
-        {
-          "orderBy": null,
-          "descOrAsc": null,
-          "creater": null,
-          "modifier": null,
-          "createTime": null,
-          "modifyTime": null,
-          "interUser": null,
-          "interPwd": null,
-          "advertisementId": 95,
-          "advertisementPosition": "P03",
-          "advertisementType": "A03",
-          "internalSubclass": null,
-          "photoUrl": "http://pubquanlang.oss-cn-shenzhen.aliyuncs.com/crm_file/information/201909/20190912074249_nCT4K_课程封面2.png",
-          "advertisementSlogan": "",
-          "detailUrl": "",
-          "createDate": 1568288435000,
-          "statusCd": "S01",
-          "effDate": 1568288413000,
-          "expDate": 2082729599000,
-          "updateDate": 1586498950000,
-          "remark": null,
-          "operateAccountNo": 17296
-        }
-      ]
-            
+
+0.绑定【根据扫描的二维码中mac地址，获取userId】
+https: //add1.pepcx.com/Ctl4ThirdParty/bindRecord
+传入参数"token"---用client_id
+传入参数"deviceId"---传入mac
+返回bean格式：
+public class BindInfoBean {
+	private int status;
+	private String msg;
+	private String userId;
+	private String deviceId;
+}
+调用示例：
+https://add1.pepcx.com/Ctl4ThirdParty/bindRecord?token=6453177f-7187-4891-9f16-81bf62bcbc56&deviceId=18:4A:50:00:2D:E1
+返回示例：
+{
+  "status": 1,
+  "msg": "success",
+  "userId": "unknown_857617848142",
+  "deviceId": "18:4A:50:00:2D:E1"
+}
+===========================================
+
+1.解绑
+https: //add1.pepcx.com/Ctl4ThirdParty/unBindRecord
+传入参数"token"---用client_id
+传入参数"deviceId"---传入mac
+返回bean格式：
+public class ResultInfoBean {
+    private int status;
+    private String msg;
+}
+调用示例：
+https: //add1.pepcx.com/Ctl4ThirdParty/unBindRecord?token=6453177f-7187-4891-9f16-81bf62bcbc56&userId=unknown_857617848142&deviceId=18:4A:50:00:2D:E1
+返回示例：
+{
+  "status": 1,
+  "msg": "success"
+}
+===========================================
+
+
+2.获取应用列表：
+https: //add1.pepcx.com/Ctl4ThirdParty/getAppLists
+传入参数"token"---用client_id
+传入参数"deviceId"---传入mac
+返回bean格式：
+public class AppInfoBean {
+    private int status; // value=1, mean ok; other mean bad.
+    private List<AppInfo> data;
+    private String msg;
+}
+public class AppInfo implements Serializable{
+	private static final long serialVersionUID = -4056974823092672009L;
+	private int isEnable;
+    private String appPkg;
+    private int appType;
+    private String appIcon;
+    private String appName;
+}
+调用示例：
+https: //add1.pepcx.com/Ctl4ThirdParty/getAppLists?token=6453177f-7187-4891-9f16-81bf62bcbc56&deviceId=18:4A:50:00:2D:E1
+返回示例：
+{
+  "status": 1,
+  "data": [
+    {
+      "isEnable": 1,
+      "appType": 0,
+      "appIcon": "http://39.99.160.107:8080/center1/icon/计算器.png",
+      "appName": "计算器",
+      "pkgName": "com.android.calculator2"
+    },
+    {
+      "isEnable": 1,
+      "appType": 0,
+      "appIcon": "http://39.99.160.107:8080/center1/icon/下载.png",
+      "appName": "下载",
+      "pkgName": "com.android.documentsui"
+    },
+    {
+      "isEnable": 1,
+      "appType": 0,
+      "appIcon": "http://39.99.160.107:8080/center1/icon/文件管理.png",
+      "appName": "文件管理",
+      "pkgName": "com.mediatek.filemanager"
+    },
+    {
+      "isEnable": 1,
+      "appType": 0,
+      "appIcon": "http://39.99.160.107:8080/center1/icon/应用市场.png",
+      "appName": "应用市场",
+      "pkgName": "com.axb.market"
+    },
+    {
+      "isEnable": 1,
+      "appType": 0,
+      "appIcon": "http://39.99.160.107:8080/center1/icon/浏览器.png",
+      "appName": "浏览器",
+      "pkgName": "com.android.browser"
+    }
+  ],
+  "msg": "success"
+}
+===================================================================
+
+3.更新app管控状态
+https: //add1.pepcx.com/Ctl4ThirdParty/updateCtlStatus
+传入参数"token"---用client_id
+传入参数"deviceId"---传入mac
+传入参数"pkgName"
+传入参数"isEnable"
+返回bean：
+public class ResultInfoBean {
+    private int status;
+    private String msg;
+}
+调用示例：
+https: //add1.pepcx.com/Ctl4ThirdParty/updateCtlStatus?token=6453177f-7187-4891-9f16-81bf62bcbc56&deviceId=18:4A:50:00:2D:E1&pkgName=com.android.calculator2&enable=0
+返回示例：
+{
+  "status": 1,
+  "msg": "success"
+}
+=======================================================
+
+4.平板使用统计
+https: //add1.pepcx.com/Ctl4ThirdParty/info/total
+传入参数"token"---用client_id
+传入参数userId
+传入参数deviceId
+传入参数"type" 默认"all"
+	    public static final String TYPE = "type";
+	    public static final String TYPEWEEK = "week";
+	    public static final String TYPEMONTH = "month";
+	    public static final String TYPEYEAR = "year";
+	    public static final String TYPEALL = "all";
+返回bean：
+public class TotalInfoBean {
+    private String msg;
+    private TotalInfo data;
+    private int status;
+}
+public class TotalInfo {
+    private long  studyTime;
+    private long  gameTime;
+}
+调用示例：
+https: //add1.pepcx.com/Ctl4ThirdParty/info/total?token=6453177f-7187-4891-9f16-81bf62bcbc56&userId=unknown_857617848142&deviceId=18:4A:50:00:2D:E1&type=all
+返回示例：
+{
+  "msg": "success",
+  "data": {
+    "studyTime": 52,
+    "gameTime": 47
+  },
+  "status": 1
+}
+=============================================================
+
+5.今日使用情况
+https: //add1.pepcx.com/Ctl4ThirdParty/info/oneDay
+传入参数"token"---用client_id
+传入参数"userId"
+传入参数"deviceId"
+传入参数"pageSize"  限制条目数量的100app
+传入参数"dayTimestamp"---(this.data.curDate.getTime() / 1000)
+返回bean：
+public class DayStatsDetail {
+    private int status;
+    private String msg;
+    private List<DayStatsDetailData> data;
+}
+public class DayStatsDetailData {
+    private int categoryType;
+    private long latestTimeEnd;
+    private long dayTimestamp;
+    private String appName; //app名
+    private long timeSpentTotal; //今日使用时间，单位秒
+    private String appPid;
+    private int sourceId; //1,表示学习app
+}
+调用示例：
+https: //add1.pepcx.com/Ctl4ThirdParty/info/oneDay?token=6453177f-7187-4891-9f16-81bf62bcbc56&userId=unknown_857617848142&deviceId=18:4A:50:00:2D:E1&pageSize=100&dayTimestamp=1633949661
+返回示例：
+{
+  "status": 1,
+  "msg": "success",
+  "data": [
+    {
+      "categoryType": 1,
+      "latestTimeEnd": 1633924415,
+      "dayTimestamp": 1633924415,
+      "appName": "数据下载器",
+      "timeSpentTotal": 16,
+      "appPid": "com.axb.axbdown2",
+      "sourceId": 1
+    },
+    {
+      "categoryType": 1,
+      "latestTimeEnd": 1633924431,
+      "dayTimestamp": 1633924431,
+      "appName": "StoryCastle",
+      "timeSpentTotal": 9,
+      "appPid": "com.example.storycastle2",
+      "sourceId": 1
+    }
+  ]
+}
+============================================================================
+
+6.APP使用排行榜，使用时长由高到低排序
+https: //add1.pepcx.com/Ctl4ThirdParty/info/topn
+传入参数"token"---用client_id
+传入参数"userId"
+传入参数"deviceId"
+传入参数"pageSize"  限制条目数量的100app
+返回bean：
+public class TopBean {
+    private int status;
+    private String msg;
+    private List<TopData> data;
+}
+public class TopData {
+    private long timeSpentTotal; //总使用时间
+    private String appName;
+    private String appPid;
+    private int categoryId; //1，表示学习app
+}
+
+调用示例：
+https: //add1.pepcx.com/Ctl4ThirdParty/info/topn?token=6453177f-7187-4891-9f16-81bf62bcbc56&userId=unknown_857617848142&deviceId=18:4A:50:00:2D:E1&pageSize=100
+返回示例：
+{
+  "status": 1,
+  "msg": "success",
+  "data": [
+    {
+      "timeSpentTotal": 43,
+      "appName": "激活",
+      "appPid": "com.axb.login",
+      "categoryId": 2
+    },
+    {
+      "timeSpentTotal": 22,
+      "appName": "用户中心",
+      "appPid": "com.axb.userspace",
+      "categoryId": 1
+    },
+    {
+      "timeSpentTotal": 16,
+      "appName": "数据下载器",
+      "appPid": "com.axb.axbdown2",
+      "categoryId": 1
+    },
+    {
+      "timeSpentTotal": 13,
+      "appName": "StoryCastle",
+      "appPid": "com.example.storycastle2",
+      "categoryId": 1
+    },
+    {
+      "timeSpentTotal": 2,
+      "appName": "SWF 播放器",
+      "appPid": "com.issess.flashplayer",
+      "categoryId": 2
+    },
+    {
+      "timeSpentTotal": 2,
+      "appName": "相机",
+      "appPid": "com.mediatek.camera",
+      "categoryId": 2
+    },
+    {
+      "timeSpentTotal": 1,
+      "appName": "小酷机器人",
+      "appPid": "com.iflytek.aiui.demo.robot",
+      "categoryId": 1
+    }
+  ]
+}

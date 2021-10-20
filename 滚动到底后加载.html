@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Document</title>
+  <script>
+    var myScroll = counter => {
+      var windowDiv = document.getElementById('window')
+      var mainDiv = document.getElementById('main')
+      if (windowDiv.scrollTop + windowDiv.clientHeight === windowDiv.scrollHeight) {
+        console.log('到底了！！！！拉长！！！')
+        mainDiv.style.height = mainDiv.offsetHeight + 1000 + 'px'
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="window" onscroll="myScroll()">
+    <div id="main" class="main"></div>
+  </div>
+</body>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #window {
+    border: black 1px solid;
+    width: 80%;
+    height: 600px;
+    overflow: auto;
+  }
+  .main {
+    width: 100%;
+    height: 800px;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+</style>
+</html>
