@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="btn">a</button>
+      <div class="out" v-if="showOut">
+        <div class="inside" ref="inside">inside</div>
+      </div>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          showOut: false
+        },
+        methods: {
+          btn() {
+            this.showOut = !this.showOut;
+            if (this.showOut) {
+              this.$nextTick(() => {
+                this.$refs.inside.style.width = "300px";
+              });
+            }
+          },
+        },
+      });
+    </script>
+  </body>
+  <style>
+    .out {
+      width: 1000px;
+      height: 2000px;
+      border: black 1px solid;
+    }
+    .inside {
+      border: black 1px solid;
+    }
+  </style>
+</html>

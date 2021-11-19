@@ -1,61 +1,224 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-		<script src="https://unpkg.com/vue"></script>
-	</head>
-	<body>
-		<div id="app">
-      <div class="show_window" @mousewheel="mouseScroll">
-        <div id="scrollBox" class="actual_content">
-          {{say}}
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="timeTable">
+        <div class="timeTable-main">
+          <!-- 切换年级 -->
+
+          <!-- 鼠标横向滚动版本 -->
+          <div class="top-wrap">
+            <div
+              class="scroll-btn"
+              @mouseover="hoverAndScroll('left')"
+              @mouseout="mouseOut"
+            >
+              左
+            </div>
+            <div class="top mouse" @mousewheel="mouseScroll">
+              <div id="scrollBox" class="grade-wrap">
+                <div class="item" v-for="(grade, ind) in gradeList" :key="ind">
+                  {{ grade.label }}
+                </div>
+              </div>
+            </div>
+            <div
+              class="scroll-btn"
+              @mouseover="hoverAndScroll('right')"
+              @mouseout="mouseOut"
+            >
+              右
+            </div>
+          </div>
+
+          <!-- 滚动条滚动版本 -->
+          <!-- <div class="top scroll">
+            <div class="grade-wrap">
+              <div class="item" v-for="(grade, ind) in gradeList" :key="ind">
+                {{ grade.label }}
+              </div>
+            </div>
+          </div> -->
         </div>
       </div>
-		</div>
-		
-		<script>
-			var app = new Vue({
-        el: '#app',
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
         data: {
-          say: 'hello world',
+          gradeList: [
+            { label: "幼小班", value: "G01" },
+            { label: "幼中班", value: "G01" },
+            { label: "幼大班", value: "G01" },
+            { label: "一年级", value: "G01" },
+            { label: "二年级", value: "G01" },
+            { label: "三年级", value: "G01" },
+            { label: "四年级", value: "G01" },
+            { label: "五年级", value: "G01" },
+            { label: "六年级", value: "G01" },
+            { label: "初一", value: "G01" },
+            { label: "初二", value: "G01" },
+            { label: "初三", value: "G01" },
+            { label: "高一", value: "G01" },
+            { label: "高二", value: "G01" },
+            { label: "高三", value: "G01" },
+          ],
+          timer: null,
+        },
+        computed: {
+          scrollBox() {
+            return document.querySelector("#scrollBox");
+          },
+          gradeWrap() {
+            return document.querySelector(".top");
+          },
+          borderDiff() {
+            return (
+              document.querySelector(".top").clientWidth -
+              document.querySelector("#scrollBox").clientWidth -
+              10
+            );
+          },
         },
         methods: {
-          mouseScroll(e) {
-            let left = parseFloat(document.querySelector('#scrollBox').style.left),
-            pace = 30
-            if (!left) {
-              e.deltaY > 0 ? 
-              document.querySelector('#scrollBox').style.left = `${pace}px`
-              :
-              document.querySelector('#scrollBox').style.left = `-${pace}px`
-            } else {
-              e.deltaY > 0 ? 
-              document.querySelector('#scrollBox').style.left = left + pace + 'px'
-              :
-              document.querySelector('#scrollBox').style.left = left - pace + 'px'
+          mouseOut() {
+            clearInterval(this.timer);
+            this.timer = null;
+          },
+          hoverAndScroll(dir) {
+            if (this.scrollBox.clientWidth > this.gradeWrap.clientWidth) {
+              this.timer = setInterval(() => {
+                let left = parseFloat(this.scrollBox.style.left),
+                  pace = 10;
+                if (!left) {
+                  if (dir == "left") {
+                    this.scrollBox.style.left =
+                      pace > 10 ? "10px" : `${pace}px`;
+                  } else {
+                    this.scrollBox.style.left =
+                      left - pace < this.borderDiff
+                        ? `${this.borderDiff}px`
+                        : `${-pace}px`;
+                  }
+                } else {
+                  if (dir == "left") {
+                    this.scrollBox.style.left =
+                      left + pace > 10 ? "10px" : `${left + pace}px`;
+                  } else {
+                    this.scrollBox.style.left =
+                      left - pace < this.borderDiff
+                        ? `${this.borderDiff}px`
+                        : `${left - pace}px`;
+                  }
+                }
+              }, 50);
             }
-          }
-        }
-      })
-		</script>
-	</body>
-  <style>
+          },
+          mouseScroll(e) {
+            if (this.scrollBox.clientWidth > this.gradeWrap.clientWidth) {
+              let left = parseFloat(this.scrollBox.style.left),
+                pace = 20;
+              if (!left) {
+                if (e.deltaY > 0) {
+                  this.scrollBox.style.left =
+                    left - pace < this.borderDiff
+                      ? `${this.borderDiff}px`
+                      : `${-pace}px`;
+                } else {
+                  this.scrollBox.style.left = pace > 10 ? "10px" : `${pace}px`;
+                }
+              } else {
+                if (e.deltaY > 0) {
+                  // 左
+                  this.scrollBox.style.left =
+                    left - pace < this.borderDiff
+                      ? `${this.borderDiff}px`
+                      : `${left - pace}px`;
+                } else {
+                  this.scrollBox.style.left =
+                    left + pace > 10 ? "10px" : left + pace + "px";
+                }
+              }
+            }
+          },
+        },
+      });
+    </script>
+  </body>
+  <style lang="scss" scoped>
+    .timeTable {
+      border: black 1px solid;
+      width: 1000px;
+      padding: 10px;
+    }
+    .timeTable-main {
+      width: 100%;
+      padding: 10px 15px 30px 15px;
+      background: white;
+    }
+    .top-wrap {
+      border: black 1px solid;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .top-wrap .scroll-btn {
+      border: black 1px solid;
+      width: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .top-wrap .top {
+      margin: 0 10px;
+    }
+    .top {
+      border: black 1px solid;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      width: 100%;
+      height: 60px;
+      overflow: auto;
+      position: relative;
+    }
+    .top .grade-wrap {
+      width: fit-content;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      position: absolute;
+      left: 10px;
+    }
+    .item {
+      border: black 1px solid;
+      text-align: center;
+      width: 90px;
+      padding: 10px 5px;
+    }
+    .mouse::-webkit-scrollbar {
+      display: none;
+    }
+    .scroll::-webkit-scrollbar {
+      height: 5px;
+      background: rgb(238, 238, 238);
+    }
+    .scroll::-webkit-scrollbar-thumb {
+      /*滚动条里面小方块*/
+      border-radius: 10px;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+      background: #c7c7c7;
+    }
     body {
       display: flex;
       justify-content: center;
-    }
-    .show_window {
-      width: 400px;
-      height: 300px;
-      border: 1px solid #000000;
-      overflow: hidden;
-    }
-    .actual_content {
-      width: 1200px;
-      height: 200px;
-      position: relative;
-      background-color: aqua;
     }
   </style>
 </html>

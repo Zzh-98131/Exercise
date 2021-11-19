@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="https://unpkg.com/vue"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{flag}}
+      <button @click="add('one')">1</button>
+      <button @click="add('two')">2</button>
+		</div>
+		
+		<script>
+			var app = new Vue({
+				el: '#app',
+				data: {
+					flag: {
+            one: 1,
+            two: 2
+          }
+				},
+        methods: {
+          add(param) {
+            this.flag[param]++
+          }
+        }
+			})
+		</script>
+	</body>
+</html>

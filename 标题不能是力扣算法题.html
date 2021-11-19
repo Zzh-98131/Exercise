@@ -4,10 +4,127 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>力扣算法题</title>
+  <title>标题不能是力扣算法题</title>
 </head>
 <body>
   <script type="text/javascript" charset="utf-8">
+    /**
+     * 题目描述
+     * url：https://leetcode-cn.com/problems/
+     */ 
+     var functionName = function(params) {
+      
+    };
+
+    /**
+     * 最大单词长度乘积，给定一个字符串数组 words，找到 length(word[i]) * length(word[j]) 的最大值，并且这两个单词不含有公共字母。
+     * 你可以认为每个单词只包含小写字母。如果不存在这样的两个单词，返回 0。
+     * url：https://leetcode-cn.com/problems/maximum-product-of-word-lengths/
+     */ 
+     var maxProduct = function(words) {
+      words =  words.sort((a, b) => {
+        return b.length - a.length
+      })
+      let ans = [0]
+      let hasSameWord = function (long, short) {
+        let res = false
+        short = new Set(short.split(''))
+        for (let i of short) { // 使用for of可以中途跳出循环，forEach则不行
+          if (long.includes(i)) {
+            res = true
+            break
+          }
+        }
+        return res
+      }
+      for (let i = 0; i < words.length; i++) {
+        for (let j = i + 1; j < words.length; j++) {
+          if (hasSameWord(words[i], words[j])) {
+            continue
+          } else {
+            ans.push(words[i].length * words[j].length)
+          }
+        }
+      }
+      return Math.max(...ans)
+    };
+
+    // 下面是更优解
+    // var maxProduct = function(words) {
+    //   const map = new Map();
+    //   let ans = 0;
+    //   for(const word of words){
+    //       const h = hash(word), n = word.length;
+    //       if(map.has(h) && map.get(h) >= n)
+    //           continue;
+    //       for(const other of map.keys())
+    //           if((other & h) == 0)
+    //               ans = Math.max(ans, map.get(other) * n);
+    //       map.set(h, n);
+    //   }
+    //   return ans;
+    // };
+    // var hash = function(word) {
+    //   let res = 0;
+    //   for(let i=0;i<word.length;i++)
+    //       res |= 1 << (word[i].charCodeAt() - 'a'.charCodeAt());
+    //   return res;
+    // };
+    console.log(maxProduct(["a","ab","abc","d","cd","bcd","abcd"]))
+
+    /**
+     * 替换字符串中的括号内容
+     * url：https://leetcode-cn.com/problems/evaluate-the-bracket-pairs-of-a-string/
+     */ 
+    var evaluate = function(s, knowledge) {
+      let sArr = [], a = s.split('(')
+      .map(str => {
+        return str.split(')')
+      })
+      .forEach(str => {
+        sArr = sArr.concat(...str)
+      })
+      sArr.map((str, index) => {
+        if (index % 2 === 1) {
+          let key = knowledge.filter(e => {
+            return e[0] == str
+          })
+          if (key.length) {
+            sArr[index] = key[0][1]
+          } else {
+            sArr[index] = '?'
+          }
+        }
+      })
+      return sArr.join('')
+
+      // 更优解法
+      const map = Object.fromEntries(knowledge);
+	    const reg = /\(([a-z]+)\)/g;
+	    return s.replace(reg,(input,$1)=>map[$1] || '?');
+    };
+    // console.log(evaluate('(a)(b)', [["a","b"],["b","a"]]))
+
+    /**
+     * 提莫攻击，给一个数组和持续时间，数组中数字代表发起攻击的时间点，发起攻击后中毒状态会持续一段时间，其中遇到新的攻击会重置持续时间，返回最终中毒状态的时长
+     * url：https://leetcode-cn.com/problems/teemo-attacking/
+     */ 
+     var findPoisonedDuration = function (timeSeries, duration) {
+      let lastTime = 0, endTime = timeSeries[0] + duration - 1
+      for (let i = 1; i < timeSeries.length; i++) {
+        if (timeSeries[i] <= endTime) {
+          lastTime += timeSeries[i] - timeSeries[i - 1]
+          endTime = timeSeries[i] + duration - 1
+        } else {
+          lastTime += duration
+          endTime = timeSeries[i] + duration - 1
+        }
+      }
+      lastTime += duration
+      return lastTime
+    }
+    // console.log(findPoisonedDuration([1, 4], 2))
+
     /**
      * 删除排序数组中的重复项，原地修改输入数组，并在使用O(1)额外空间的条件下完成
      * url：https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/x2gy9m/
@@ -32,9 +149,8 @@
      */ 
     var stockPriceMax = function (prices) {
       let max = Math.max(...prices), min = Math.min(...prices)
-      console.log(prices.max())
     }
-    stockPriceMax([7,1,5,3,6,4])
+    // stockPriceMax([7,1,5,3,6,4])
 
     /**
      * 给定一个整数数组nums和一个整数目标值 target，请你在该数组中找出和为目标值target的那两个整数，并返回它们的数组下标。
