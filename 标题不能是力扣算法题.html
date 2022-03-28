@@ -12,15 +12,95 @@
      * 题目描述
      * url：https://leetcode-cn.com/problems/
      */ 
-     var functionName = function(params) {
+    var functionName = function(params) {
       
     };
+
+    /**（未完成）
+     * 题目描述:请你判断一个 9 x 9 的数独是否有效。只需要 根据以下规则 ，验证已经填入的数字是否有效即可。
+     * 数字 1-9 在每一行只能出现一次。
+     * 数字 1-9 在每一列只能出现一次。
+     * 数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。（请参考示例图）
+     * url：https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/x2f9gg/
+     */ 
+    var isValidSudoku = function(board) {
+      if (board.length != 9) { return false }
+
+      for (let i = 0; i < 9; ++i) { // 横竖判断
+        if (board[i].length != 9) { return false }
+
+        for (let j = 0; j < 9; ++j) {
+          if (board[i][j] != '.' && board[i].filter (e => {
+            return e == board[i][j]
+          }).length != 1) {
+            return false
+          }
+        }
+      }
+    };
+    console.log(isValidSudoku([
+       ["5","3",".",".","7",".",".",".","."]
+      ,["6",".",".","1","9","5",".",".","."]
+      ,[".","9","8",".",".",".",".","6","."]
+      ,["8",".",".",".","6",".",".",".","3"]
+      ,["4",".",".","8",".","3",".",".","1"]
+      ,["7",".",".",".","2",".",".",".","6"]
+      ,[".","6",".",".",".",".","2","8","."]
+      ,[".",".",".","4","1","9",".",".","5"]
+      ,[".",".",".",".","8",".",".","7","9"]
+    ]))
+
+    /**
+     * 题目描述:给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。
+     * url：https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/x2jrse/
+     */ 
+    var twoSum = function(nums, target) {
+      let diff = nums.map(e => {return target - e})
+      for (let i = 0; i < nums.length; ++i) {
+        let now = nums[i] // 缓存当前值
+        nums[i] = null
+        if (nums.indexOf(diff[i]) > -1) {
+          return [i, nums.indexOf(diff[i])]
+        } else {
+          nums[i] = now
+        }
+      }
+      return []
+    };
+    // console.log(twoSum([3,3], 6))
+
+    /**
+     * 题目描述:给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+     * 请注意 ，必须在不复制数组的情况下原地对数组进行操作。
+     * url：https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/x2ba4i/
+     */ 
+    var moveZeroes = function(nums) {
+      let nOfZero = nums.filter(e => {return e == 0}).length
+      for (let i = 0; i < nums.length; ++i) {
+        if (nums[i] == 0 && i < nums.length - nOfZero) {
+          nums.splice(i, 1)
+          nums.push(0)
+          i -= 1
+        }
+      }
+      return nums
+    };
+    // console.log(moveZeroes([0]))
+
+    /**
+     * 题目描述：给定一个由 整数 组成的 非空 数组所表示的非负整数，在该数的基础上加一。
+     * url：https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/x2cv1c/
+     */ 
+    var plusOne = function(digits) {
+      return `${BigInt(digits.join('')) + 1n}`.split('')
+    };
+    // console.log(plusOne([6,1,4,5,3,9,0,1,9,5,1,8,6,7,0,5,5,4,3]))
 
     /**
      * 题目描述:给你两个整数数组 nums1 和 nums2 ，请你以数组形式返回两数组的交集。返回结果中每个元素出现的次数，应与元素在两个数组中都出现的次数一致（如果出现次数不一致，则考虑取较小值）。可以不考虑输出结果的顺序。
      * url：https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/x2y0c2/
      */ 
-     var intersect = function(nums1, nums2) {
+    var intersect = function(nums1, nums2) {
       let min = nums2, max = nums1, res = []
       if (nums1.length < nums2.length) {
         min = nums1
@@ -34,13 +114,13 @@
       }
       return res
     };
-    console.log(intersect([4,9,5], [9,4,9,8,4]))
+    // console.log(intersect([4,9,5], [9,4,9,8,4]))
 
     /**
      * 题目描述:给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
      * url：https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/x21ib6/
      */ 
-     var singleNumber = function(nums) {
+    var singleNumber = function(nums) {
       for (let i = 0; i < nums.length; ++i) {
         if (nums[i] != null) {
           let oneTime = nums[i]
@@ -59,7 +139,7 @@
      * 题目描述:给你一个整数数组 nums 。如果任一值在数组中出现 至少两次 ，返回 true ；如果数组中每个元素互不相同，返回 false 。
      * url：https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/x248f5/
      */ 
-     var containsDuplicate = function(nums) {
+    var containsDuplicate = function(nums) {
       return Array.from(new Set(nums)).length != nums.length
     };
     // console.log(containsDuplicate([1,2,3,4]))
@@ -69,7 +149,7 @@
      * 要求直接改变原数组，方法不需要返回
      * url：https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/x2skh7/
      */ 
-     var rotate = function(nums, k) {
+    var rotate = function(nums, k) {
       let len = nums.length, arr = new Array(len)
       for (let i = 0; i < len; ++i) {
         arr[(i + k) % len] = nums[i]
@@ -88,7 +168,7 @@
      * 不要使用额外的空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
      * url：https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/x2gy9m/
      */ 
-     var removeDuplicates = function(nums) {
+    var removeDuplicates = function(nums) {
       // 使用快慢指针解题
       if (nums.length == 0) {
         return 0
@@ -113,7 +193,7 @@
      * 返回 你能获得的 最大 利润 。
      * url：https://leetcode-cn.com/leetbook/read/top-interview-questions-easy/x2zsx1/
      */ 
-     var maxProfit = function(prices) {
+    var maxProfit = function(prices) {
       let keep = false, // 当前是否持有股票
           inPrice = 0, outPrice = 0, // 记录买入卖出价
           profit = 0 // 利润
@@ -140,7 +220,7 @@
      * 你可以认为每个单词只包含小写字母。如果不存在这样的两个单词，返回 0。
      * url：https://leetcode-cn.com/problems/maximum-product-of-word-lengths/
      */ 
-     var maxProduct = function(words) {
+    var maxProduct = function(words) {
       words =  words.sort((a, b) => {
         return b.length - a.length
       })
