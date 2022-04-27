@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>顺德一外-小初衔接</title>
+    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="./css/index.css">
+
+    <style>
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="app-header">
+        <!-- <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAyCAYAAAAayliMAAAAAXNSR0IArs4c6QAAAl1JREFUaEPtmT+I1EAUh38vcV3BQtDCYrll8wJiZWdluacoZ6GINoqllmIptmKp5ZU2YqONiiD+aRQLr9JGWXbCrLvLWhx4xcGxt4Y8iUxkRE83Ri4ZyJQhw3zfvDfJzBuC440c50ctUHYE6wjUESg4A/8lhVqt1r5ms3lRRN5orVcKMuXqXlggDMMFEXkB4ACAjdlstjAej7/koijwciGBdrvNvu+/JKKOYXBHoNPpHPQ8L535loHfFJFzWutHBSY0d9d/ikAQBIeI6BmA/emIIrIB4LTWOn22rS23ADMfFpGnRLTXkK6LyEmt9attJTeD5RIIw/CIiDwBsMf0X0uS5MRgMHhbBnw65twCzNwVkYdEtNvArvq+f6zf778rC35uAWZeAvAAwC6T8599319USn0oE34uAWY+A+AegJ0GdkhE3SiKVNnwfxUIguACEd0BsMPARiLS1Vp/qgL8HwXCMLyUJMkyEXkmbT7Gcbw4Go0mVYHfUoCZrwC4bS3y957nHVVKrVYJ/rcCzHwNwE0LdCWO4+PD4XCtavC/CARBcIOIrlugrxuNxlKv11uvIvxPAsx8C8BVC/T5dDo9NZlM0m1CZVv6IyNmXgZw2aJ87HneWaXUZmXJDVgKfx7A3QyUiO5HUZQ++1p1+O8p5LyA8ymUpYnLi/hHqjv9GbUi4e6PzJJwdyuRSTi9mcsknN5OW+nk7oHGknD3SGlJuHuotxa2u2UVKxLuFrasr5O7pcVMwunibibhdHndWtjuXnBkEk5fMZV97Jy7Ol026Fbj1wJlR6aOQB2BgjPwDYZXQkJT5fEUAAAAAElFTkSuQmCC" alt=""/> -->
+        小初衔接
+      </div>
+
+      <div class="wrap" @scroll="scrollScreen">
+        <!-- 图片展示区 -->
+        <div class="exhibit" v-if="imgSrc">
+          <img class="exhibit-img" :src="imgSrc" alt="暂无图片">
+        </div>
+
+        <!-- 文章列表区 -->
+        <div class="article-list">
+          <div class="article-card" v-for="(item, i) in articleList" :key="i">
+            <div class="card-info">
+              <p class="article-title">{{ item.title }}</p>
+              <div class="date-check">
+                <span>{{ item.effDate | dateFormat }}</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <img width="16px" height="16px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAABEJJREFUWEftVltoXFUUXeveyaNJKZr85KNKqwZRYqHYj1KwIhVBStQqSrFIMbn3nhnzoAShIi1MxVS0ajRmHufOhCCkPlKwglSoL6rgs1r8EERFfIAkNFZTyCBJZu6WM05KMrkznX4FIedjPubus886a6+99iFWeXGVz8cagDUG/l8MaK1vAfAAye0ichOAVpK2iPwN4GeSX5A85TjOxySllg6riQGt9W4AcQDbakkK4BcAz05OTo7G4/F8tT1VASQSiWsikcgYgF2lJH+JyBsAPhSRc7Ozs9MNDQ355ubm1nw+32FZ1s4gCPYB2GTiSX4PYL/neWcrgagIIJ1Od5J8FcDVJKdF5Om5uTnd398/V+1GIkKt9R6SRwHcCGCB5JOe5z0fti8UQDqdjpIcAWADeHthYcHp7e29UCP9xbB4PF7f1tY2SHIAgCUiyampqb54PB4szbMCgO/7jwEYESlq6LBSarD8YK31teZbqTT1IvJVXV3d0e7u7q9DYu8TkddIriM56nmeUxGA7/t7ReT4f+Wj8jwvU54wlUp1kDxDsnVZInIewF7P806W70kmk7fZtv0ugPUAnlNKHVyMucRANpvdWigUPgWwDsDjSqkXwijXWhtBmW54j+TBIAhylmUdEBHDnGnHzUqpiyFM3AXgHQCGsUei0eh4UajmZ2ho6KqmpqZvAFwHIKWUMslWrHQ63U7yRwAX8vn8pp6entnFIK21Ab9DRB6ORqOvh+3PZDLdQRBkSeYKhcL2WCz2XRGA7/t7ROQtAPN1dXUbu7q6psMS+L5/u4icAfC5UmrH0hit9SsAequxZzrE9/0fALQDGFRKHSoCGBsba5yfn/8MwFaSJ13XNW63wsmM+Ej+KiKzQRDcEIvFzpv9ExMT9szMzDkR2ULy/jAdmDittRHuUwD+BHCrUur3SxrIZDKbgyAwKm4h+bLneQcqaOB9AHeS/FZEjohIjmQfgE4Af+RyufaBgYF/QjSw39wVQGBZ1t2u65o8yx8kWus7ABi1NlqWNei67qHyRJlMZmMQBKYM15d9u2jb9m7HcYwWlq1UKvUQyeMkIwD6lFLGY4prhQ9orU3fnjDBJDMi0qOUWliacXx8fEMulzO33kWy6AMAXjKUhty83+jcmJFlWXHXdY8sjQl1wtLweRNAM4CzIrIvGo3+FFaSSv9ls9mWQqGQBvCgoR3AE0qpY+XxFWfB6Ojotnw+P2H6GoDx/ySAY0qpyWpAEonEetu2PeP/ZlwDMJ7gKqVOhO2rOg2Hh4c3NDY2vigij5b8PE/ytIh8ZKYhyfNBEBQikUiriHSIyE6S95Ycz5z3gW3bjuM4v1UCXdN7IJlMbolEIodF5B7jZJcphWnfT0g+43ne6cuVrSYAi0lGRkZa6+vrO0XEvIhuJtlSmpjFFxGALy3LOuW6rnmQ1LSuCEBNGa8waA3AGgOrzsC/mGK7MGxCW78AAAAASUVORK5CYII=" alt=""/>
+                <span>{{item.clickCount}}</span>
+              </div>
+            </div>
+            <img class="card-img" :src="item.photoUrl" alt="">
+          </div>
+          <div class="show-more" ref="showMore">
+            {{ listLoading ? '正在加载...' : tips}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: '#app',
+        data() {
+          return {
+            imgSrc: '/',
+            articleList: [],
+            listLoading: false,
+            tips: '展示更多'
+          }
+        },
+        filters: {
+          dateFormat: function(timeStamp) {
+            let date = new Date(timeStamp),
+            y = date.getFullYear(),
+            m = parseFloat(date.getMonth()) + 1,
+            d = date.getDay()
+
+            return `${y}-${m}-${d}`
+          }
+        },
+        mounted() {
+          this.getArticleList()
+        },
+        methods: {
+          scrollScreen() {
+            const windowHeight = document.getElementById('app').clientHeight
+            const itemPos = this.$refs.showMore.getBoundingClientRect().bottom
+            // 页面滚动到底判断条件： itemPos <= windowHeight
+            if (itemPos <= windowHeight) {
+              this.getArticleList()
+            }
+          },
+          async getArticleList() {
+            var vm = this
+            let obj = {
+              interUser: 'runLfb',
+              interPwd: '25d55ad283aa400af464c76d713c07ad',
+              informationColumn: 'I01',
+              yearSection: 'Y02',
+              grade: 'G07',
+              pageSize: 2,
+              currentPage: 1
+            }
+            let params = {
+              requestJson: JSON.stringify(obj)
+            };
+            vm.listLoading = true
+            $.ajax({
+              method: 'POST',
+              async: true,
+              url: 'http://183.6.58.74:30000/service-soa/oprInformationPublish/getParentInfomationList',
+              contentType: "application/x-www-form-urlencoded",
+              dataType: 'json',
+              data: params,
+              success: function (res) {
+                vm.articleList = res.data
+                vm.listLoading = false
+              },
+              error: function (err) {
+                vm.articleList = []
+                vm.listLoading = false
+              }
+            });
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
