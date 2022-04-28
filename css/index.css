@@ -100,3 +100,17 @@
   font-size: 14px;
   color: #999999;
 }
+#app .wrap .article-list .empty {
+  text-align: center;
+}
+#app .wrap .article-list .empty .empty-img {
+  width: 48%;
+  height: 20.5%;
+  margin-top: 100px;
+}
+#app .wrap .article-list .common-tip {
+  margin-top: 20px;
+  font-size: 15px;
+  font-weight: 400;
+  color: #999999;
+}
