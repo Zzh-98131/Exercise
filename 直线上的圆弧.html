@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas 斜线与圆弧示例</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="800" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // 定义直线的起始点和结束点
+        const startPoint = { x: 100, y: 300 };
+        const endPoint = { x: 400, y: 100 };
+
+        // 定义截取的直线段的起始和结束位置
+        const segmentStart = { x: 215, y: 223 };
+        const segmentEnd = { x: 307, y: 161 };
+
+        // 绘制整个直线
+        ctx.beginPath();
+        ctx.moveTo(startPoint.x, startPoint.y);
+        ctx.lineTo(endPoint.x, endPoint.y);
+        ctx.strokeStyle = 'blue';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // 计算圆弧的参数
+        const radius = 50;
+        const midPoint = { x: (segmentStart.x + segmentEnd.x) / 2, y: (segmentStart.y + segmentEnd.y) / 2 };
+        const angle = Math.atan2(segmentEnd.y - segmentStart.y, segmentEnd.x - segmentStart.x); // 计算斜率的角度
+
+        // 计算圆弧的起始和结束点
+        const arcStartX = midPoint.x - radius * Math.cos(angle);
+        const arcStartY = midPoint.y - radius * Math.sin(angle);
+        const arcEndX = midPoint.x + radius * Math.cos(angle);
+        const arcEndY = midPoint.y + radius * Math.sin(angle);
+
+        // 绘制圆弧
+        ctx.beginPath();
+        ctx.arc(midPoint.x, midPoint.y, radius, angle + Math.PI, angle, false); // 绘制圆弧
+        ctx.strokeStyle = 'red'; // 圆弧颜色
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // 在圆弧两端绘制直线段以连接
+        ctx.beginPath();
+        ctx.moveTo(segmentStart.x, segmentStart.y);
+        ctx.lineTo(arcStartX, arcStartY); // 圆弧左端
+        ctx.moveTo(arcEndX, arcEndY); // 圆弧右端
+        ctx.lineTo(segmentEnd.x, segmentEnd.y);
+        ctx.strokeStyle = 'blue';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+    </script>
+</body>
+</html>

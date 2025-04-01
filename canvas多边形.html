@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draggable Polygon</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            display: block;
+            margin: 0 auto;
+            background: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="600" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Polygon vertices
+        const vertices = [
+            { x: 100, y: 100 },
+            { x: 200, y: 50 },
+            { x: 300, y: 100 },
+            { x: 250, y: 200 },
+            { x: 150, y: 200 },
+            { x: 350, y: 230 }
+        ];
+
+        let isDragging = false;
+        let dragStart = { x: 0, y: 0 };
+
+        // Function to draw the polygon
+        function drawPolygon() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.moveTo(vertices[0].x, vertices[0].y);
+            for (let i = 1; i < vertices.length; i++) {
+                ctx.lineTo(vertices[i].x, vertices[i].y);
+            }
+            ctx.closePath();
+            ctx.stroke();
+            ctx.fillStyle = 'rgba(100, 150, 200, 0.5)';
+            ctx.fill();
+        }
+
+        // Function to check if a point is inside the polygon
+        function isPointInPolygon(x, y, vertices) {
+            let inside = false;
+            for (let i = 0, j = vertices.length - 1; i < vertices.length; j = i++) {
+                const xi = vertices[i].x, yi = vertices[i].y;
+                const xj = vertices[j].x, yj = vertices[j].y;
+                const intersect = ((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+                if (intersect) inside = !inside;
+            }
+            return inside;
+        }
+
+        // Event listeners for dragging
+        canvas.addEventListener('mousedown', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            if (isPointInPolygon(mouseX, mouseY, vertices)) {
+                isDragging = true;
+                dragStart = { x: mouseX, y: mouseY };
+            }
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                const rect = canvas.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+                const dx = mouseX - dragStart.x;
+                const dy = mouseY - dragStart.y;
+
+                vertices.forEach(vertex => {
+                    vertex.x += dx;
+                    vertex.y += dy;
+                });
+
+                dragStart = { x: mouseX, y: mouseY };
+                drawPolygon();
+            }
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        // Initial draw
+        drawPolygon();
+    </script>
+</body>
+</html>

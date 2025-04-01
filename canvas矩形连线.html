@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canvas Draggable Rectangles with Movable Vertical Line</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="600" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const rect1 = { x: 100, y: 100, width: 100, height: 50 };
+        const rect2 = { x: 400, y: 300, width: 100, height: 50 };
+        let isDragging = false;
+        let draggedRect = null;
+        let draggedControlPoint = null;
+        let offsetX, offsetY;
+
+        const controlPoint = { x: 250, y: (rect1.y + rect1.height + rect2.y) / 2, radius: 5 };
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw the rectangles
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(rect1.x, rect1.y, rect1.width, rect1.height);
+            ctx.fillRect(rect2.x, rect2.y, rect2.width, rect2.height);
+
+            // Update control point position
+            controlPoint.x = (rect1.x + rect1.width / 2 + rect2.x + rect2.width / 2) / 2;
+
+            // Draw the control point
+            ctx.fillStyle = 'green';
+            ctx.beginPath();
+            ctx.arc(controlPoint.x, controlPoint.y, controlPoint.radius, 0, 2 * Math.PI);
+            ctx.fill();
+
+            // Draw the vertical line
+            const midX1 = rect1.x + rect1.width / 2;
+            const midY1 = rect1.y + rect1.height / 2;
+            const midX2 = rect2.x + rect2.width / 2;
+            const midY2 = rect2.y + rect2.height / 2;
+
+            const startX = midX1;
+            const startY = rect1.y + rect1.height;
+            const endX = midX2;
+            const endY = rect2.y;
+
+            ctx.strokeStyle = 'red';
+            ctx.beginPath();
+            ctx.moveTo(midX1, startY);  // Start from bottom center of rect1
+            ctx.lineTo(midX1, controlPoint.y);  // Move vertically to control point
+            ctx.lineTo(midX2, controlPoint.y);  // Move horizontally to other rect
+            ctx.lineTo(midX2, endY);  // Move vertically to top center of rect2
+            ctx.stroke();
+        }
+
+        function isInsideRect(x, y, rect) {
+            return x >= rect.x && x <= rect.x + rect.width && y >= rect.y && y <= rect.y + rect.height;
+        }
+
+        function isInsideControlPoint(x, y, controlPoint) {
+            const dx = x - controlPoint.x;
+            const dy = y - controlPoint.y;
+            return dx * dx + dy * dy <= controlPoint.radius * controlPoint.radius;
+        }
+
+        canvas.addEventListener('mousedown', (e) => {
+            const mouseX = e.offsetX;
+            const mouseY = e.offsetY;
+
+            if (isInsideRect(mouseX, mouseY, rect1)) {
+                isDragging = true;
+                draggedRect = rect1;
+                offsetX = mouseX - rect1.x;
+                offsetY = mouseY - rect1.y;
+            } else if (isInsideRect(mouseX, mouseY, rect2)) {
+                isDragging = true;
+                draggedRect = rect2;
+                offsetX = mouseX - rect2.x;
+                offsetY = mouseY - rect2.y;
+            } else if (isInsideControlPoint(mouseX, mouseY, controlPoint)) {
+                isDragging = true;
+                draggedControlPoint = controlPoint;
+                offsetY = mouseY - controlPoint.y;
+            }
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (isDragging && draggedRect) {
+                const mouseX = e.offsetX;
+                const mouseY = e.offsetY;
+
+                draggedRect.x = mouseX - offsetX;
+                draggedRect.y = mouseY - offsetY;
+
+                draw();
+            } else if (isDragging && draggedControlPoint) {
+                const mouseY = e.offsetY;
+                draggedControlPoint.y = mouseY - offsetY; // Only move vertically
+                draw();
+            }
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            isDragging = false;
+            draggedRect = null;
+            draggedControlPoint = null;
+        });
+
+        draw();
+    </script>
+</body>
+</html>
